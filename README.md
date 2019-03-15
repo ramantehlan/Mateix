@@ -116,17 +116,27 @@ May the force be with you.
 (http://www.ascii-art.de/ascii/s/starwars.txt)
 ```
 
+The gist of it is. We need to create a solution to synchronize two folders in two different devices. To finally decide upon our solution, we need to make sure the following characteristics are met.
+
+- **Reliability:** Solution should be reliable, and should take care of all the possible cases it can go wrong.
+
+- **Secure:** The whole process should be secure.
+
+- **Automatic:** Everything should happen in the background with minimum human intervene.
+
+- **Cheap:** It should do everything in minimum time while using very few resources.
+
 ## Challenges
 
-What are the challenges we are facing in order to solve this problem?
+Following are the challenges we need to tackle, mentioned with their possible solutions.
 
-## Possible Solutions
+**Challenge**
 
-what are the possible solutions for the above challenges?
+Possible Solutions
 
 ## Final Solution
 
-what are the selected solutions, to create the final solution?
+
 
 ## Usage
 
