@@ -130,9 +130,11 @@ The gist of it is. We need to create a solution to synchronize two folders in tw
 
 Following are the challenges we need to tackle, mentioned with their possible solutions.
 
-**Challenge**
+**Challenge 1:** How should we communicate between two computers?
 
-Possible Solutions
+**Challenge 2:** How should we setup folders?
+
+**Challenge 3:**
 
 ## Final Solution
 
@@ -144,16 +146,26 @@ How to use this tool?
 
 ## Pre-Requisites
 
-What are the pre-requisites for working on this project?
+If you are interested in the development, then here are some pre-requisites you need to have.
+
+- Familiarity of Go language.
+- Terminal
 
 ## File Structure
 
-What is the file structure and how do we use it?
+```
+.
+└── README.md
+```
+
+No | File/Folder Name | Purpose |
+---|------------------|---------|
+1 | `README.md` | Current file you are reading
 
 ## Resources
 
-Any resource?
+- [Wiki File Synchronization](https://en.wikipedia.org/wiki/File_synchronization)
 
 ## License
 
-Which license is it using?
+GNU GPL V3.0
