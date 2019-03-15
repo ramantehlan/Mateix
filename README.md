@@ -7,11 +7,11 @@ A easy file synchronisation tool.
 
 - [Problem Statement](#problem-statement)
 - [Challenges](#challenges)
-- [Possible Solutions](#possible-solutions)
 - [Final Solution](#final-solution)
 - [Usage](#usage)
-- [Pre-Requisites](#pre-requisites)
-- [File Structure](#file-structure)
+- [Development](#development)
+  - [Pre-Requisites](#pre-requisites)
+  - [File Structure](#file-structure)
 - [Resources](#resources)
 - [License](#license)
 
@@ -116,7 +116,7 @@ May the force be with you.
 (http://www.ascii-art.de/ascii/s/starwars.txt)
 ```
 
-The gist of it is. We need to create a solution to synchronize two folders in two different devices. To finally decide upon our solution, we need to make sure the following characteristics are met.
+The gist of it is. **We need to create a solution to synchronize two folders in two different devices**. To finally decide upon our solution, we need to make sure the following characteristics are met.
 
 - **Reliability:** Solution should be reliable, and should take care of all the possible cases it can go wrong.
 
@@ -160,14 +160,16 @@ Here will go the details of the final solution
 
 How to use this tool?
 
-## Pre-Requisites
+## Development
+
+#### Pre-Requisites
 
 If you are interested in the development, then here are some pre-requisites you need to have.
 
 - Familiarity of Go language.
 - Terminal
 
-## File Structure
+#### File Structure
 
 ```
 .
@@ -179,6 +181,7 @@ No | File/Folder Name | Purpose |
 ---|------------------|---------|
 1 | `README.md` | Current file you are reading
 2 | `LICENSE` | GNU GPL V3.0 License
+
 
 ## Resources
 
