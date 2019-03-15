@@ -124,7 +124,7 @@ The gist of it is. We need to create a solution to synchronize two folders in tw
 
 - **Automatic:** Everything should happen in the background with minimum human intervene.
 
-- **Cheap:** It should do everything in minimum time while using very few resources.
+- **Cheap:** It should do everything in minimum time while using very few resources, with least latency.
 
 ## Challenges
 
@@ -134,11 +134,27 @@ Following are the challenges we need to tackle, mentioned with their possible so
 
 **Challenge 2:** How should we setup folders?
 
-**Challenge 3:**
+**Challenge 3:** How should we measure the difference?
+
+We can use any of the below methods to check if the files are changed.
+- time modification
+- Checksum
+- Or both of them?
+
+**Challenge 4:** How and after what time span should the files be sync?
+
+Below are the possible two possible cases?
+- Imediately?
+- Update over a period of time?
+  - Crone job?
+
+**Challenge 5:** What if something still goes wrong with data?
+
+- Use of git
 
 ## Final Solution
 
-
+Here will go the details of the final solution
 
 ## Usage
 
@@ -155,12 +171,14 @@ If you are interested in the development, then here are some pre-requisites you 
 
 ```
 .
+├── LICENSE
 └── README.md
 ```
 
 No | File/Folder Name | Purpose |
 ---|------------------|---------|
 1 | `README.md` | Current file you are reading
+2 | `LICENSE` | GNU GPL V3.0 License
 
 ## Resources
 
