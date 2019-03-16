@@ -219,13 +219,13 @@ Here will go the details of the final solution
 
 Using Mateix is very simple. First, you need to install this tool, and then use it as a shell command.
 
-> Right now, the install script will work only on a Debian-Based Distribution, but it can be easily configured for the other distros aswell. 
+> Right now, the install script will work only on a Debian-Based Distribution, but it can be easily configured for the other distros aswell.
 
 #### Installation
 
 To install Mateix, open your terminal, and type the commands given below.
 
-1. Download the [install](#) script. `$ wget https://github.com/something/something/install`
+1. Download the [https://github.com/ramantehlan/mateix/releases/download/v1/install](#) script. `$ wget https://raw.githubusercontent.com/ramantehlan/mateix/v1/install`
 2. Make the script executables. `$ sudo chmod +x ./install`
 3. Execute the `install` script. `$ ./install`
 

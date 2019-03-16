@@ -34,3 +34,9 @@ ${GREEN}[Task 2]${NC} Create the required dotfiles.
 ${GREEN}[Task 3]${NC} Install git, if not already installed.
 ${GREEN}[Task 4]${NC} Install ssh, if not already installed.
 "
+
+${YELLOW}---------------------------------------------------------------${NC}"
+
+echo "\n${GREEN}- Executing Task 1${NC}\n"
+
+printf "\n${GREEN}✔ Task 1 Complete!${NC}\n"
