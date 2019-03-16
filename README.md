@@ -134,7 +134,7 @@ The gist of it is. **We need to create a solution to synchronize two folders in 
 
 Following are the challenges we need to tackle, mentioned with their possible solutions.
 
-**Challenge 1:** How should we communicate between two computers?
+**Challenge 1: How should we communicate between two computers?**
 
 **Solution:**
 
@@ -152,11 +152,11 @@ We have multiple methods to communicate securely over the internet, which will a
 2. Eternal Terminal
 3. Mosh
 
-After comparing all the methods, I have used `**Mosh**` since it fits the
+After comparing all the methods, I have used **`Mosh`** since it fits the
 needs best. It is *highly efficient, works well on low bandwidth, connection
 is persist over different networks, works well on all the operting systems.*
 
-**Challenge 2:** How should we measure the difference?
+**Challenge 2: How should we measure the difference?**
 
 **Solution:**
 
@@ -174,11 +174,11 @@ It's an (almost) certain way measure difference, hash collisions do happen,
 but It is rare and therefor **more reliable**. Though it is **slow**,
 as the file size will grow, it will get slower.
 
-After comparing all the methods, I have used **Time modification** as a measure to
+After comparing all the methods, I have used **`Time modification`** as a measure to
 look for difference, since *the possibity of something going wrong is very less,
 and it is the fastest way to do so.*
 
-**Challenge 3:** How should we tackle the differences?
+**Challenge 3: How should we tackle the differences?**
 
 Possible cases
 
