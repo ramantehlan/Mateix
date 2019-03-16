@@ -1,7 +1,7 @@
 # mateix
-A easy file synchronisation tool.
+An easy file synchronisation tool.
 
-> Mateix means 'same' in catalan language, which is a language of Catalonia community of spain.
+> Mateix means 'same' in the Catalan language, which is a language of Catalonia community of Spain.
 
 # Index
 
@@ -9,8 +9,11 @@ A easy file synchronisation tool.
 - [Challenges](#challenges)
 - [Final Solution](#final-solution)
 - [Usage](#usage)
+  - [Installation](#installation)
+  - [Commands](#commands)
 - [Development](#development)
   - [Pre-Requisites](#pre-requisites)
+  - [Setup](#setup)
   - [File Structure](#file-structure)
 - [Resources](#resources)
 - [License](#license)
@@ -25,7 +28,7 @@ Prime Minister Lama Su,
 
 I hope this letter finds you in the best of health.
 
-The last batch of clones you built for us were faulty
+The last batch of clones you built for us was faulty
 and did not perform as expected (https://www.youtube.com/watch?v=b0DuUnhGBK4)
 
 We unearthed some secrets about how the droid army was trained and hope that
@@ -36,7 +39,7 @@ large discount will help the Republic in its efforts.
 One of our allies came across these schematics in an abandoned base that shed some
 light on the droid training exercises, master Yoda concluded that a pair of droids
 undergo various kinds of battle simulations during which each droid records its
-progress and learning in a force, currently unfamilair to us, called "Data".
+progress and learning in a force, currently unfamiliar to us, called "Data".
 This force from both droids is then combined in a ritual called the
 "Sync" resulting in both droids having an increased data force.
 
@@ -89,7 +92,7 @@ May the force be with you.
 
 
                                  +---------------------+
-                                 | Whats going on here?|
+                                 | What's going on here?|
                                  +------------------+--+
                                                     |
                                                     |
@@ -130,30 +133,39 @@ The gist of it is. **We need to create a solution to synchronize two folders in 
 
 Following are the challenges we need to tackle, mentioned with their possible solutions.
 
-##### Challenge 1
-*How should we communicate between two computers?*
+**Challenge 1:**
+
+How should we communicate between two computers?
+
+**Solution:**
 
 Possible case
 
-No | IP-1 | IP-2 | Example | Details |
----|------|------|---------|---------|
-1  | Static | Static | Server to Server | *Details*
-2  | Dynamic | Static | Server to remote devices | *Details*
-3  | Dynamic | Dynamic | Two remote devices | *Details*
+IP-1 | IP-2 | Example | Details |
+-----|------|---------|---------|
+Static | Static | Server to Server | *Details*
+Dynamic | Static | Server to remote devices | *Details*
+Dynamic | Dynamic | Two remote devices | *Details*
 
 How to handle the dynamic address?
 using UUID to identify the machine, since the IP keeps changing
 
-##### Challenge 2
-*How should we setup folders?*
+**Challenge 2:**
 
-##### Challenge 3
-*How should we measure the difference?*
+How should we measure the difference?
+
+**Solution:**
 
 We can use any of the below methods to check if the files are changed.
 - time modification
 - Checksum
 - Or both of them?
+
+Possible cases
+
+1. The file exists on device 1, not on device 2
+2. The file exists on both devices and is identical
+3. The file exists on both devices and is different
 
 File 1 | File 2 | Action
 -------|--------|-------
@@ -169,30 +181,40 @@ Does not exist | Exist | Created
 Existed | Does not exist |  Deleted
 Exist | Modification | Modification
 
-##### Challenge 4
-*How will you handle a merge conflict bettween the same file*
+**Challenge 3:**
 
-##### Challenge 5
-*How and after what time span should the files be sync?*
+How will you handle a merge conflict between the same file
+
+**Solution:**
+
+**Challenge 4:**
+
+How and after what time span should the files be sync?
+
+**Solution:**
 
 Below are the possible two possible cases?
-- Imediately?
+- Immediately?
 - Update over a period of time?
   - Crone job? `crontab -e`
 
-##### Challenge 6
-*What if something still goes wrong with data?*
+**Challenge 5:**
+
+What if something still goes wrong with data?
+
+**Solution**
 
 Sync only one folder
 
 - Use of git
 
-##### Challenge 7
-*How to setup everything?*
+**Challenge 7:**
+How to set up everything?
 
-Dot files in the home folder, executables in the bin file. Also possibly each folder can have a dot file too, to store the meta data.
+**Solution:**
 
-Command can be `$ mateix init`
+Dotfiles in the home folder, executables in the bin file. Also possibly each folder can have a dot file too, to store the metadata.
+
 
 ## Final Solution
 
@@ -200,16 +222,48 @@ Here will go the details of the final solution
 
 ## Usage
 
-How to use this tool?
+Using Mateix is very simple. First, you need to install this tool, and then use it as a shell command.
+
+#### Installation
+
+To install Mateix, open your terminal, and type the commands given below.
+
+1. Download the [install](#) script. `$ wget https://github.com/something/something/install`
+2. Make the script executables. `$ sudo chmod +x ./install`
+3. Execute the `install` script. `$ ./install`
+
+This will not just install Mateix in the bin file, but will also install all the dependencies like git, ssh, crontab etc. You can check out more details of it when the script is getting downloaded.
+
+> In order to sync with the other system, you will need to install Mateix in it too.
+
+#### Commands  
+
+Once Mateix is installed, now you can use it to sync folders. Following are the commands available right now to help you sync folders.
+
+> Also note, all commands have a fixed prefix `mateix`. Example: if a command is `init`, it must be executed as `mateix init`.
+
+Command | Working |
+--------|---------|
+$ mateix init | To setup a folder for sync
 
 ## Development
+
+If you are interested in developing this project, feel free to read more about it below.
 
 #### Pre-Requisites
 
 If you are interested in the development, then here are some pre-requisites you need to have.
 
 - Familiarity of Go language.
-- Terminal
+- Knowledge of Git
+- Unix/Linux Terminal
+
+#### Setup
+
+To set up the development environment in your system:
+
+1. Install Go in your system.
+2. Fork this repo, and clone it in your workplace.
 
 #### File Structure
 
@@ -228,6 +282,9 @@ No | File/Folder Name | Purpose |
 ## Resources
 
 - [Wiki File Synchronization](https://en.wikipedia.org/wiki/File_synchronization)
+- [Go Lang Org](https://golang.org/)
+- [SSH - Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
+- [Git - Version Control System](https://en.wikipedia.org/wiki/Git)
 
 ## License
 
