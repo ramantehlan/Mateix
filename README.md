@@ -136,15 +136,19 @@ Exist | Modification | Modification
 
 **Challenge: How will you handle a merge conflict?**
 
+If the file exists and is different, you have to ask the user how to merge them or which one to pick. Asking regular users how to merge files is a bad idea. (Asking developers how to merge files is usually a bad idea.)
+
+Another way to prevent merge conflicts is to lock a file on machine A if it’s being written to on machine B. This prevents an application on machine A from modifying it at the same time.
+
+ Merges almost always require manual intervention and will often be unresolvable (either the user won’t know what to do and will just overwrite one side, or the file format won’t support lines-of-text style merging).
+
+Provide only the read access to the other device, only the original owner will have the write access
 
 ***
 
 **Challenge: What if something still goes wrong with data?**
 
-
-Sync only one folder
-
-- Use of git
+A program no matter how well written, will always have that 0.1% that it will fail. In a case like that, the most important thing is the data. I have created a automatic git commits system, which will look for changes every 10 minutes, and will automaticlly trigger a commit. You can also switch it off if you want. 
 
 ***
 
