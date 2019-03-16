@@ -130,22 +130,25 @@ The gist of it is. **We need to create a solution to synchronize two folders in 
 
 Following are the challenges we need to tackle, mentioned with their possible solutions.
 
-**Challenge 1:** How should we communicate between two computers?
+##### Challenge 1
+*How should we communicate between two computers?*
 
 Possible case
 
-No | IP-1 Type | IP-2 Type | Details
----|-------|--------|
-1 |Static Ip | Static Ip | Example servers
-2 | Dynamic Ip | Static Ip | Dropbox and remote devices
-3 | Dynamic Ip | Dynamic Ip | Two remote devices
+No | IP-1 | IP-2 | Example | Details |
+---|------|------|---------|---------|
+1  | Static | Static | Server to Server | *Details*
+2  | Dynamic | Static | Server to remote devices | *Details*
+3  | Dynamic | Dynamic | Two remote devices | *Details*
 
 How to handle the dynamic address?
 using UUID to identify the machine, since the IP keeps changing
 
-**Challenge 2:** How should we setup folders?
+##### Challenge 2
+*How should we setup folders?*
 
-**Challenge 3:** How should we measure the difference?
+##### Challenge 3
+*How should we measure the difference?*
 
 We can use any of the below methods to check if the files are changed.
 - time modification
@@ -166,22 +169,26 @@ Does not exist | Exist | Created
 Existed | Does not exist |  Deleted
 Exist | Modification | Modification
 
-**Challenge 4:** How will you handle a conflict bettween the same file
+##### Challenge 4
+*How will you handle a merge conflict bettween the same file*
 
-**Challenge 5:** How and after what time span should the files be sync?
+##### Challenge 5
+*How and after what time span should the files be sync?*
 
 Below are the possible two possible cases?
 - Imediately?
 - Update over a period of time?
   - Crone job? `crontab -e`
 
-**Challenge 6:** What if something still goes wrong with data?
+##### Challenge 6
+*What if something still goes wrong with data?*
 
 Sync only one folder
 
 - Use of git
 
-**Challenge 7:** How to setup everything?
+##### Challenge 7
+*How to setup everything?*
 
 Dot files in the home folder, executables in the bin file. Also possibly each folder can have a dot file too, to store the meta data.
 
