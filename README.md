@@ -71,6 +71,10 @@ Following are the options on when files should be synchronized:
 
   However this might cause one problem, if we update the device 2, a call will be triggered as well, which might send the changes back to device 1. This will probably cause a butterfly effect.
 
+  Also, the problem with inotify tool is that, Inotify does not support recursively watching directories, so if the main folder have sub-folder, it won't track them.
+
+  Rename events are not handled directly; i.e., inotify issues two separate events that must be examined and matched in a context of potential race conditions.
+
   `inotify-tools`
 
 - After a time gap.
@@ -148,7 +152,7 @@ Provide only the read access to the other device, only the original owner will h
 
 **Challenge: What if something still goes wrong with data?**
 
-A program no matter how well written, will always have that 0.1% that it will fail. In a case like that, the most important thing is the data. I have created a automatic git commits system, which will look for changes every 10 minutes, and will automaticlly trigger a commit. You can also switch it off if you want. 
+A program no matter how well written, will always have that 0.1% that it will fail. In a case like that, the most important thing is the data. I have created a automatic git commits system, which will look for changes every 10 minutes, and will automaticlly trigger a commit. You can also switch it off if you want.
 
 ***
 
