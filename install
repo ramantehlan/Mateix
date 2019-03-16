@@ -4,6 +4,8 @@
 # This script is to install Mateix
 ##
 
+DOTFILE="${HOME}/.mateix"
+
 ## Colours
 RED='\033[0;31m'
 BLUE='\033[0;34m'
@@ -35,8 +37,22 @@ ${GREEN}[Task 3]${NC} Install git, if not already installed.
 ${GREEN}[Task 4]${NC} Install ssh, if not already installed.
 "
 
-${YELLOW}---------------------------------------------------------------${NC}"
+echo "${YELLOW}---------------------------------------------------------------${NC}"
 
 echo "\n${GREEN}- Executing Task 1${NC}\n"
 
+# Get the executable file, and send it to the bin folder
+
 printf "\n${GREEN}✔ Task 1 Complete!${NC}\n"
+
+
+echo "\n${GREEN}- Executing Task 2${NC}\n"
+
+if [ ! -d $DOTFILE ];
+  then
+    mkdir $DOTFILE
+fi
+
+echo "'${DOTFILE}' created."
+
+printf "\n${GREEN}✔ Task 2 Complete!${NC}\n"

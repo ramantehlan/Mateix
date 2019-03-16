@@ -134,22 +134,26 @@ The gist of it is. **We need to create a solution to synchronize two folders in 
 
 Following are the challenges we need to tackle, mentioned with their possible solutions.
 
-**Challenge 1:**
-
-How should we communicate between two computers?
+**Challenge 1:** How should we communicate between two computers?
 
 **Solution:**
 
-Possible case
+Any selected solution should work effectively in the following possible scenarios:
 
-IP-1 | IP-2 | Example | Details |
------|------|---------|---------|
-Static | Static | Server to Server | *Details*
-Dynamic | Static | Server to remote devices | *Details*
-Dynamic | Dynamic | Two remote devices | *Details*
+IP-1 | IP-2 |  Details |
+-----|------|----------|
+Static | Static |`Server to Server` <br> Example: Backup servers connected to production servers.
+Dynamic | Static | `Server to remote devices` <br> Example: Dropbox, Google drive connected to remote devices.
+Dynamic | Dynamic | `Two remote devices` <br> Example: Two remote devices connected.
 
-How to handle the dynamic address?
-using UUID to identify the machine, since the IP keeps changing
+We have multiple methods to communicate securely over the internet, which will also work for above scenarios. Following are the top 3 of selected methods:
+
+1. SSH
+2. Eternal Terminal
+3. Mosh
+
+
+
 
 **Challenge 2:**
 
