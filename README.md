@@ -132,6 +132,17 @@ Following are the challenges we need to tackle, mentioned with their possible so
 
 **Challenge 1:** How should we communicate between two computers?
 
+Possible case
+
+No | IP-1 Type | IP-2 Type | Details
+---|-------|--------|
+1 |Static Ip | Static Ip | Example servers
+2 | Dynamic Ip | Static Ip | Dropbox and remote devices
+3 | Dynamic Ip | Dynamic Ip | Two remote devices
+
+How to handle the dynamic address?
+using UUID to identify the machine, since the IP keeps changing
+
 **Challenge 2:** How should we setup folders?
 
 **Challenge 3:** How should we measure the difference?
@@ -141,16 +152,40 @@ We can use any of the below methods to check if the files are changed.
 - Checksum
 - Or both of them?
 
-**Challenge 4:** How and after what time span should the files be sync?
+File 1 | File 2 | Action
+-------|--------|-------
+Deleted | No Deleted | Delete
+Deleted | Deleted | Nothing
+No Change | No change | Nothing
+Modification | No change | Use A
+Modification | Modification | Merge
+
+Time x | Time x+1 | Action
+-------|----------|-------
+Does not exist | Exist | Created
+Existed | Does not exist |  Deleted
+Exist | Modification | Modification
+
+**Challenge 4:** How will you handle a conflict bettween the same file
+
+**Challenge 5:** How and after what time span should the files be sync?
 
 Below are the possible two possible cases?
 - Imediately?
 - Update over a period of time?
-  - Crone job?
+  - Crone job? `crontab -e`
 
-**Challenge 5:** What if something still goes wrong with data?
+**Challenge 6:** What if something still goes wrong with data?
+
+Sync only one folder
 
 - Use of git
+
+**Challenge 7:** How to setup everything?
+
+Dot files in the home folder, executables in the bin file. Also possibly each folder can have a dot file too, to store the meta data.
+
+Command can be `$ mateix init`
 
 ## Final Solution
 
