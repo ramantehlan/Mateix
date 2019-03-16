@@ -59,6 +59,8 @@ After comparing all the methods, I have used **`Mosh`** since it fits the
 needs best. It is *highly efficient, works well on low bandwidth/connection
 is persist over different networks, works well on all the operating systems.*
 
+***
+
 **Challenge: When files should be synchronized?**
 
 Following are the options on when files should be synchronized:
@@ -76,6 +78,8 @@ Following are the options on when files should be synchronized:
   To do this, we need to set up a cron job, which will run after a particular period of time, and then it will sync everything. It will be using more resources as it will run even when there are no changes.
 
   `crontab -e`
+
+***
 
 **Challenge: How should we measure the difference?**
 
@@ -97,6 +101,8 @@ as the file size will grow, it will get slower.
 After comparing all the methods, I have used **`Time modification`** as a measure to
 look for difference, since *the possibility of something going wrong is very less,
 and it is the fastest way to do so.*
+
+***
 
 **Challenge: How should we tackle the differences?**
 
@@ -126,8 +132,12 @@ Does not exist | Exist | Created
 Existed | Does not exist |  Deleted
 Exist | Modification | Modification
 
+***
+
 **Challenge: How will you handle a merge conflict?**
 
+
+***
 
 **Challenge: What if something still goes wrong with data?**
 
@@ -136,7 +146,7 @@ Sync only one folder
 
 - Use of git
 
-
+***
 
 ## Final Solution
 
