@@ -22,7 +22,7 @@ A simple file synchronisation tool.
 
 ## Problem Statement
 
-The gist of it is. **We need to create a solution to synchronize two folders in two different devices**. To finally decide upon our solution, we need to make sure the following characteristics are met.
+**We need to create a solution to synchronize two folders in two different devices**. To finally decide upon our solution, we need to make sure the following characteristics are met.
 
 - **Reliability:** Solution should be reliable, and should take care of all the possible cases it can go wrong.
 
@@ -32,7 +32,7 @@ The gist of it is. **We need to create a solution to synchronize two folders in 
 
 - **Cheap:** It should do everything in minimum time while using very few resources, with least latency.
 
-> Find the secret problem statement at the end of the file.
+> Find the original problem statement at the end of the file.
 
 ## Challenges
 
