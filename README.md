@@ -162,13 +162,13 @@ is persist over different networks, works well on all the operting systems.*
 
 To measure the difference, we can use any of method mentioned below.
 
-1 Time modification (Meta data)
+1. Time modification (Meta data)
 
 It is **less reliable**, since software can and does manipulate the modification
 time. Also, the user might change system time and confuse the sync program. But,
 it is a **faster** way to check if the files have been updated.
 
-2 Checksum (Hash the files)
+2. Checksum (Hash the files)
 
 It's an (almost) certain way measure difference, hash collisions do happen,
 but It is rare and therefor **more reliable**. Though it is **slow**,
@@ -200,15 +200,11 @@ Does not exist | Exist | Created
 Existed | Does not exist |  Deleted
 Exist | Modification | Modification
 
-**Challenge 3:**
-
-How will you handle a merge conflict between the same file
+**Challenge 4: How will you handle a merge conflict?**
 
 **Solution:**
 
-**Challenge 4:**
-
-How and after what time span should the files be sync?
+**Challenge 5: How and after what time span should the files be sync?**
 
 **Solution:**
 
@@ -217,9 +213,7 @@ Below are the possible two possible cases?
 - Update over a period of time?
   - Crone job? `crontab -e`
 
-**Challenge 5:**
-
-What if something still goes wrong with data?
+**Challenge 6: What if something still goes wrong with data?**
 
 **Solution**
 
