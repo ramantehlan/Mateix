@@ -152,19 +152,33 @@ We have multiple methods to communicate securely over the internet, which will a
 2. Eternal Terminal
 3. Mosh
 
+After comparing all the methods, I have used `**Mosh**` since it fits the
+needs best. It is *highly efficient, works well on low bandwidth, connection
+is persist over different networks, works well on all the operting systems.*
 
-
-
-**Challenge 2:**
-
-How should we measure the difference?
+**Challenge 2:** How should we measure the difference?
 
 **Solution:**
 
-We can use any of the below methods to check if the files are changed.
-- time modification
-- Checksum
-- Or both of them?
+To measure the difference, we can use any of method mentioned below.
+
+1 Time modification (Meta data)
+
+It is **less reliable**, since software can and does manipulate the modification
+time. Also, the user might change system time and confuse the sync program. But,
+it is a **faster** way to check if the files have been updated.
+
+2 Checksum (Hash the files)
+
+It's an (almost) certain way measure difference, hash collisions do happen,
+but It is rare and therefor **more reliable**. Though it is **slow**,
+as the file size will grow, it will get slower.
+
+After comparing all the methods, I have used **Time modification** as a measure to
+look for difference, since *the possibity of something going wrong is very less,
+and it is the fastest way to do so.*
+
+**Challenge 3:** How should we tackle the differences?
 
 Possible cases
 
@@ -290,7 +304,12 @@ After you install Mateix, an executable is created in bin file, whose Dotfiles a
 - [Wiki File Synchronization](https://en.wikipedia.org/wiki/File_synchronization)
 - [Go Lang Org](https://golang.org/)
 - [SSH - Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
+- [Eternal Terminal](https://mistertea.github.io/EternalTerminal/)
+- [Mosh](https://mosh.org/)
+- [Most Research Paper](https://mosh.org/mosh-paper.pdf)
 - [Git - Version Control System](https://en.wikipedia.org/wiki/Git)
+- [what could be better than ssh](https://medium.com/@grassfedcode/what-could-be-better-than-ssh-e69561ec1b83)
+- [File Synchronization Algorithms](https://ianhowson.com/blog/file-synchronisation-algorithms/)
 
 ## License
 
