@@ -1,5 +1,5 @@
 # mateix
-An easy file synchronisation tool.
+An simple file synchronisation tool.
 
 > Mateix means 'same' in the Catalan language, which is a language of Catalonia community of Spain.
 
@@ -15,6 +15,7 @@ An easy file synchronisation tool.
   - [Pre-Requisites](#pre-requisites)
   - [Setup](#setup)
   - [File Structure](#file-structure)
+  - [Working](#working)
 - [Resources](#resources)
 - [License](#license)
 
@@ -208,12 +209,6 @@ Sync only one folder
 
 - Use of git
 
-**Challenge 7:**
-How to set up everything?
-
-**Solution:**
-
-Dotfiles in the home folder, executables in the bin file. Also possibly each folder can have a dot file too, to store the metadata.
 
 
 ## Final Solution
@@ -223,6 +218,8 @@ Here will go the details of the final solution
 ## Usage
 
 Using Mateix is very simple. First, you need to install this tool, and then use it as a shell command.
+
+> Right now, the install script will work only on a Debian-Based Distribution, but it can be easily configured for the other distros aswell. 
 
 #### Installation
 
@@ -244,7 +241,8 @@ Once Mateix is installed, now you can use it to sync folders. Following are the 
 
 Command | Working |
 --------|---------|
-$ mateix init | To setup a folder for sync
+init | To setup a folder for sync
+--help | Print all the commands
 
 ## Development
 
@@ -277,7 +275,11 @@ No | File/Folder Name | Purpose |
 ---|------------------|---------|
 1 | `README.md` | Current file you are reading
 2 | `LICENSE` | GNU GPL V3.0 License
+3 | `install` | Install script
 
+#### Working
+
+After you install Mateix, an executable is created in bin file, whose Dotfiles are store in the home folder.
 
 ## Resources
 
