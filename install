@@ -1,0 +1,36 @@
+#!/bin/sh
+
+##
+# This script is to install Mateix
+##
+
+## Colours
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+YELLOW="\033[1;33m"
+NC='\033[0m'
+
+echo $YELLOW
+cat << "EOF"
+---------------------------------------------------------------
+ ___      ___       __  ___________  _______   __     ___  ___
+|"  \    /"  |     /""\("     _   ")/"     "| |" \   |"  \/"  |
+ \   \  //   |    /    \)__/  \\__/(: ______) ||  |   \   \  /
+ /\\  \/.    |   /' /\  \  \\_ /    \/    |   |:  |    \\  \/
+|: \.        |  //  __'  \ |.  |    // ___)_  |.  |    /\.  \
+|.  \    /:  | /   /  \\  \\:  |   (:      "| /\  |\  /  \   \
+|___|\__/|___|(___/    \___)\__|    \_______)(__\_|_)|___/\___|
+
+---------------------------------------------------------------
+EOF
+echo ${NC}
+echo "
+This will install the Mateix tool in your system. This require
+the root acess. Following are the tasks preformed.
+
+${GREEN}[Task 1]${NC} Install the Mateix executable in bin.
+${GREEN}[Task 2]${NC} Create the required dotfiles.
+${GREEN}[Task 3]${NC} Install git, if not already installed.
+${GREEN}[Task 4]${NC} Install ssh, if not already installed.
+"
