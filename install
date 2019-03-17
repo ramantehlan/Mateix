@@ -44,9 +44,8 @@ echo "\n${GREEN}- Executing Task 1${NC}\n"
 
   if [ ! -f $BINFILE];
     then
-      wget https://github.com/ramantehlan/mateix/raw/master/mateix
-      chmod +x ./mateix
-      sudo mv mateix $BINFILE
+      sudo wget -O $BINFILE https://github.com/ramantehlan/mateix/raw/master/mateix
+      sudo chmod +x $BINFILE
   fi
 
 echo "${BINFILE} Created"
@@ -60,9 +59,8 @@ if [ ! -d $DOTFILE ];
   then
     mkdir $DOTFILE
     touch "${DOTFILE}/syncList.txt"
-    wget https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
-    chmod +x ./mateixWatch
-    sudo mv mateixWatch "${DOTFILE}/mateixWatch"
+    sudo wget -O "${DOTFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
+    sudo chmod +x "${DOTFILE}/mateixWatch"
 fi
 
 echo "'${DOTFILE}' created"
