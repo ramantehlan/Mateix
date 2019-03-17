@@ -45,7 +45,7 @@ echo "\n${GREEN}- Executing Task 1${NC}\n"
   if [ ! -f $BINFILE ];
     then
       sudo wget -O $BINFILE https://github.com/ramantehlan/mateix/raw/master/mateix
-      schmod +x $BINFILE
+      sudo chmod +x $BINFILE
   fi
 
 echo "${BINFILE} Created"
