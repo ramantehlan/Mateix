@@ -170,7 +170,7 @@ Using Mateix is very simple. First, you need to install this tool, and then use 
 
 To install Mateix, open your terminal, and type the commands given below.
 
-1. Download the [https://github.com/ramantehlan/mateix/releases/download/v1/install](#) script. `$ wget https://raw.githubusercontent.com/ramantehlan/mateix/v1/install`
+1. Download the [Install](https://raw.githubusercontent.com/ramantehlan/mateix/master/install) script. `$ wget https://raw.githubusercontent.com/ramantehlan/mateix/master/install`
 2. Make the script executables. `$ sudo chmod +x ./install`
 3. Execute the `install` script. `$ ./install`
 
