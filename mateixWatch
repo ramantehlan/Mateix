@@ -1,16 +1,16 @@
 #!/bin/sh
 
+DOTFILE="${HOME}/.mateix"
+
 mateixWatch() {
 fN=$1
 echo "Running inotifywait on ${1}"
-while inotifywait -qqre modify $1 -e create -re delete -e moved_to -e moved_from; do
-    echo "Change found in ${1}"
-    #echo "The file '$file' appeared in directory '$path' via '$action'"
-
+while inotifywait -qqre modify $1 -e create -e moved_to -e moved_from; do
+    echo "Change found in ${1}" >> "${DOTFILE}/log.txt"
 done
 }
 
-SyncList="syncList.txt"
+SyncList="${DOTFILE}/syncList.txt"
 while IFS= read -r folderName
 do
   mateixWatch "$folderName" &
