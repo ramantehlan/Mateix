@@ -5,6 +5,7 @@
 ##
 
 DOTFILE="${HOME}/.mateix"
+BINFILE="/usr/bin/mateix"
 
 ## Colours
 RED='\033[0;31m'
@@ -32,7 +33,7 @@ This will install the Mateix tool in your system. This require
 the root acess. Following are the tasks preformed.
 
 ${GREEN}[Task 1]${NC} Install the Mateix executable in bin.
-${GREEN}[Task 2]${NC} Create the required dotfiles.
+${GREEN}[Task 2]${NC} Create the dotfiles, scripts and config files.
 ${GREEN}[Task 3]${NC} Install git, if not already installed.
 ${GREEN}[Task 4]${NC} Install ssh, if not already installed.
 "
@@ -41,7 +42,14 @@ echo "${YELLOW}---------------------------------------------------------------${
 
 echo "\n${GREEN}- Executing Task 1${NC}\n"
 
-# Get the executable file, and send it to the bin folder
+  if [ ! -f $BINFILE];
+    then
+      wget https://github.com/ramantehlan/mateix/raw/master/mateix
+      chmod +x ./mateix
+      sudo mv mateix $BINFILE
+  fi
+
+echo "${BINFILE} Created"
 
 printf "\n${GREEN}✔ Task 1 Complete!${NC}\n"
 
@@ -51,8 +59,14 @@ echo "\n${GREEN}- Executing Task 2${NC}\n"
 if [ ! -d $DOTFILE ];
   then
     mkdir $DOTFILE
+    touch "${DOTFILE}/syncList.txt"
+    wget https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
+    chmod +x ./mateixWatch
+    sudo mv mateixWatch "${DOTFILE}/mateixWatch"
 fi
 
-echo "'${DOTFILE}' created."
+echo "'${DOTFILE}' created"
+echo "'${DOTFILE}/syncList.txt' created"
+echo "'${DOTFILE}/mateixWatch' created"
 
 printf "\n${GREEN}✔ Task 2 Complete!${NC}\n"
