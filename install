@@ -6,6 +6,7 @@
 
 DOTFILE="${HOME}/.mateix"
 BINFILE="/usr/bin"
+SERVICEFILE="/etc/systemd/system"
 
 ## Colours
 RED='\033[0;31m'
@@ -42,10 +43,10 @@ echo "${YELLOW}---------------------------------------------------------------${
 
 echo "\n${GREEN}- Executing Task 1${NC}\n"
 
-sudo apt-get update
-sudo apt-get install inotify-tools
-sudo apt-get install git
-sudo apt-get install mosh
+#sudo apt-get update
+#sudo apt-get install inotify-tools
+#sudo apt-get install git
+#sudo apt-get install mosh
 
 echo "\n${GREEN}✔ Task 1 Complete!${NC}\n"
 echo "\n${GREEN}- Executing Task 2${NC}\n"
@@ -55,7 +56,11 @@ echo "\n${GREEN}- Executing Task 2${NC}\n"
       sudo wget -O "${BINFILE}/mateix" https://github.com/ramantehlan/mateix/raw/master/mateix
       sudo chmod +x "${BINFILE}/mateix"
       sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
-      sudo chmod +x "${BINFILE}/mateixWatch"
+      sudo chmod 744 "${BINFILE}/mateixWatch"
+      sudo wget -O "${SERVICEFILE}/mateix-watch.service" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateix-watch.service
+      sudo chmod 664 "${SERVICEFILE}/mateix-watch.service"
+      systemctl daemon-reload
+      systemctl enable mateix-watch.service
   fi
 
 echo "'${BINFILE}/mateix' Created"
