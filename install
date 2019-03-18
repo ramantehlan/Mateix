@@ -56,9 +56,9 @@ echo "\n${GREEN}- Executing Task 2${NC}\n"
       sudo wget -O "${BINFILE}/mateix" https://github.com/ramantehlan/mateix/raw/master/mateix
       sudo chmod +x "${BINFILE}/mateix"
       sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
-      sudo chmod 744 "${BINFILE}/mateixWatch"
+      sudo chmod +x "${BINFILE}/mateixWatch"
       sudo wget -O "${SERVICEFILE}/mateix-watch.service" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateix-watch.service
-      sudo chmod 664 "${SERVICEFILE}/mateix-watch.service"
+      sudo chmod +rwx "${SERVICEFILE}/mateix-watch.service"
       systemctl daemon-reload
       systemctl enable mateix-watch.service
   fi
@@ -73,6 +73,7 @@ if [ ! -d $DOTFILE ];
   then
     mkdir $DOTFILE
     touch "${DOTFILE}/syncList.txt"
+    echo "/home/atom/mateixTest" >> "${DOTFILE}/syncList.txt"
 fi
 
 echo "'${DOTFILE}' created"
