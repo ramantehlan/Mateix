@@ -1,0 +1,8 @@
+[Unit]
+After=syslog.service
+
+[Service]
+ExecStart=/usr/bin/mateixWatch
+
+[Install]
+WantedBy=default.target
