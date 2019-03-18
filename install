@@ -5,7 +5,7 @@
 ##
 
 DOTFILE="${HOME}/.mateix"
-BINFILE="/usr/bin/mateix"
+BINFILE="/usr/bin"
 
 ## Colours
 RED='\033[0;31m'
@@ -32,39 +32,45 @@ echo "
 This will install the Mateix tool in your system. This require
 the root acess. Following are the tasks preformed.
 
-${GREEN}[Task 1]${NC} Install the Mateix executable in bin.
-${GREEN}[Task 2]${NC} Create the dotfiles, scripts and config files.
-${GREEN}[Task 3]${NC} Install git, if not already installed.
-${GREEN}[Task 4]${NC} Install ssh, if not already installed.
+
+${GREEN}[Task 1]${NC} Install all the dependencies.
+${GREEN}[Task 2]${NC} Install the Mateix executables and services.
+${GREEN}[Task 3]${NC} Create the dotfiles and config files.
 "
 
 echo "${YELLOW}---------------------------------------------------------------${NC}"
 
 echo "\n${GREEN}- Executing Task 1${NC}\n"
 
+sudo apt-get update
+sudo apt-get install inotify-tools
+sudo apt-get install git
+sudo apt-get install mosh
+
+echo "\n${GREEN}✔ Task 1 Complete!${NC}\n"
+echo "\n${GREEN}- Executing Task 2${NC}\n"
+
   if [ ! -f $BINFILE ];
     then
-      sudo wget -O $BINFILE https://github.com/ramantehlan/mateix/raw/master/mateix
-      sudo chmod +x $BINFILE
+      sudo wget -O "${BINFILE}/mateix" https://github.com/ramantehlan/mateix/raw/master/mateix
+      sudo chmod +x "${BINFILE}/mateix"
+      sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
+      sudo chmod +x "${BINFILE}/mateixWatch"
   fi
 
-echo "${BINFILE} Created"
+echo "'${BINFILE}/mateix' Created"
+echo "'${BINFILE}/mateixWatch' created"
 
-printf "\n${GREEN}✔ Task 1 Complete!${NC}\n"
-
-
-echo "\n${GREEN}- Executing Task 2${NC}\n"
+echo "\n${GREEN}✔ Task 2 Complete!${NC}\n"
+echo "\n${GREEN}- Executing Task 3${NC}\n"
 
 if [ ! -d $DOTFILE ];
   then
     mkdir $DOTFILE
     touch "${DOTFILE}/syncList.txt"
-    wget -O "${DOTFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
-    chmod +x "${DOTFILE}/mateixWatch"
 fi
 
 echo "'${DOTFILE}' created"
 echo "'${DOTFILE}/syncList.txt' created"
-echo "'${DOTFILE}/mateixWatch' created"
 
-printf "\n${GREEN}✔ Task 2 Complete!${NC}\n"
+printf "\n${GREEN}✔ Task 3 Complete!${NC}\n"
