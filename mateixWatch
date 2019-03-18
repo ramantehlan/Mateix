@@ -15,3 +15,5 @@ while IFS= read -r folderName
 do
   mateixWatch "$folderName" &
 done < "$SyncList"
+
+# sudo killall -e inotifywait -qqre modify /home/atom/mateixTest -e create -e moved_to -e moved_from
