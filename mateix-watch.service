@@ -1,8 +1,9 @@
 [Unit]
-After=syslog.service
+Description=This is to start the mateix watch script.
 
 [Service]
+Type=notify
 ExecStart=/usr/bin/mateixWatch
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
