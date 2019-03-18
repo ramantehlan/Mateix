@@ -4,7 +4,7 @@
 # This script is to install Mateix
 ##
 
-DOTFILE="${HOME}/.mateix"
+DOTFILE="/etc/.mateix"
 BINFILE="/usr/bin"
 SERVICEFILE="/etc/systemd/system"
 
@@ -71,9 +71,9 @@ echo "\n${GREEN}- Executing Task 3${NC}\n"
 
 if [ ! -d $DOTFILE ];
   then
-    mkdir $DOTFILE
-    touch "${DOTFILE}/syncList.txt"
-    echo "/home/atom/mateixTest" >> "${DOTFILE}/syncList.txt"
+    sudo mkdir $DOTFILE
+    sudo touch "${DOTFILE}/syncList.txt"
+    sudo echo "/home/atom/mateixTest" >> "${DOTFILE}/syncList.txt"
 fi
 
 echo "'${DOTFILE}' created"
