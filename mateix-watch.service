@@ -1,9 +1,9 @@
 [Unit]
-Description=This is to start the mateix watch script.
+Description=Start the mateix watch script.
 
 [Service]
 Type=notify
-ExecStart=/usr/bin/mateixWatch
+ExecStart=/usr/bin/mateixWatch start
 TimeoutSec=infinity
 KillMode=process
 

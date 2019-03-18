@@ -3,7 +3,6 @@
 DOTFILE="/etc/.mateix"
 
 mateixWatch() {
-fN=$1
 echo "Running inotifywait on ${1}"
 while inotifywait -qqre modify $1 -e create -e moved_to -e moved_from; do
     echo "Change found in ${1}" >> "${DOTFILE}/log.txt"
@@ -13,7 +12,15 @@ done
 SyncList="${DOTFILE}/syncList.txt"
 while IFS= read -r folderName
 do
-  mateixWatch "$folderName" &
+  case $1 in
+    start)
+      mateixWatch "$folderName" &
+    ;;
+    stop)
+      sudo killall -e sudo killall -e inotifywait -qqre modify $1 -e create -e moved_to -e moved_from
+    ;;
+    *)
+      echo "Error: ${1} wrong command"
+    ;;
+  esac
 done < "$SyncList"
-
-# sudo killall -e inotifywait -qqre modify /home/atom/mateixTest -e create -e moved_to -e moved_from
