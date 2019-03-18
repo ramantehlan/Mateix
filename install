@@ -73,7 +73,7 @@ if [ ! -d $DOTFILE ];
   then
     sudo mkdir $DOTFILE
     sudo touch "${DOTFILE}/syncList.txt"
-    sudo echo "/home/atom/mateixTest" >> "${DOTFILE}/syncList.txt"
+    sudo sh -c 'echo "/home/atom/mateixTest" >> "${DOTFILE}/syncList.txt"'
 fi
 
 echo "'${DOTFILE}' created"
