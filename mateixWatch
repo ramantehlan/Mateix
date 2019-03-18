@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DOTFILE="${HOME}/.mateix"
+DOTFILE="/etc/.mateix"
 
 mateixWatch() {
 fN=$1
