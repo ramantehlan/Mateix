@@ -4,6 +4,8 @@ Description=This is to start the mateix watch script.
 [Service]
 Type=notify
 ExecStart=/usr/bin/mateixWatch
+TimeoutSec=infinity
+KillMode=process
 
 [Install]
 WantedBy=multi-user.target
