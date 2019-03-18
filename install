@@ -51,20 +51,29 @@ echo "\n${GREEN}- Executing Task 1${NC}\n"
 echo "\n${GREEN}✔ Task 1 Complete!${NC}\n"
 echo "\n${GREEN}- Executing Task 2${NC}\n"
 
-  if [ ! -f $BINFILE ];
+  if [ ! -f "${BINFILE}/mateix" ];
     then
       sudo wget -O "${BINFILE}/mateix" https://github.com/ramantehlan/mateix/raw/master/mateix
       sudo chmod +x "${BINFILE}/mateix"
-      sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
-      sudo chmod +x "${BINFILE}/mateixWatch"
-      sudo wget -O "${SERVICEFILE}/mateix-watch.service" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateix-watch.service
-      sudo chmod +rw "${SERVICEFILE}/mateix-watch.service"
-      sudo systemctl daemon-reload
-      sudo systemctl enable mateix-watch.service
   fi
 
-echo "'${BINFILE}/mateix' Created"
+  if [ ! -f "${BINFILE}/mateixWatch" ];
+    then
+      sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
+      sudo chmod +x "${BINFILE}/mateixWatch"
+  fi
+
+  if [ ! -f "${SERVICEFILE}/mateix-watch.service" ];
+    then
+    sudo wget -O "${SERVICEFILE}/mateix-watch.service" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateix-watch.service
+    sudo chmod +rw "${SERVICEFILE}/mateix-watch.service"
+    sudo systemctl daemon-reload
+    sudo systemctl enable mateix-watch.service
+  fi
+
+echo "'${BINFILE}/mateix' created"
 echo "'${BINFILE}/mateixWatch' created"
+echo "'${SERVICEFILE}/mateix-watch.service' created"
 
 echo "\n${GREEN}✔ Task 2 Complete!${NC}\n"
 echo "\n${GREEN}- Executing Task 3${NC}\n"
@@ -73,7 +82,6 @@ if [ ! -d $DOTFILE ];
   then
     sudo mkdir $DOTFILE
     sudo touch "${DOTFILE}/syncList.txt"
-    sudo sh -c 'echo "/home/atom/mateixTest" >> "${DOTFILE}/syncList.txt"'
 fi
 
 echo "'${DOTFILE}' created"
