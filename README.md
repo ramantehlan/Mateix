@@ -81,7 +81,10 @@ Following are the options on when files should be synchronized:
 
   To do this, we need to set up a cron job, which will run after a particular period of time, and then it will sync everything. It will be using more resources as it will run even when there are no changes.
 
-  `crontab -e`
+  `crontab -e` -> this is for individual users.
+
+
+  Or, we can also run .service encodes information about a process controlled and supervised by `systemd`. -> this is for whole system
 
 ***
 
