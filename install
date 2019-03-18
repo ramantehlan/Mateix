@@ -58,7 +58,7 @@ echo "\n${GREEN}- Executing Task 2${NC}\n"
       sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
       sudo chmod +x "${BINFILE}/mateixWatch"
       sudo wget -O "${SERVICEFILE}/mateix-watch.service" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateix-watch.service
-      sudo chmod +rwx "${SERVICEFILE}/mateix-watch.service"
+      sudo chmod +rw "${SERVICEFILE}/mateix-watch.service"
       systemctl daemon-reload
       systemctl enable mateix-watch.service
   fi
