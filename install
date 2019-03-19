@@ -5,7 +5,7 @@
 ##
 
 ROOTDOTFILE="/etc/.mateix"
-USERDOTFILE="${HOME}/.mateix"
+USERDOTFILE="${HOME}/.mateixConfig"
 BINFILE="/usr/bin"
 SERVICEFILE="/etc/systemd/system"
 
