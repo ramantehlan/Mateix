@@ -4,7 +4,8 @@
 # This script is to install Mateix
 ##
 
-DOTFILE="/etc/.mateix"
+ROOTDOTFILE="/etc/.mateix"
+USERDOTFILE="${HOME}/.mateix"
 BINFILE="/usr/bin"
 SERVICEFILE="/etc/systemd/system"
 
@@ -78,13 +79,19 @@ echo "'${SERVICEFILE}/mateix-watch.service' created"
 echo "\n${GREEN}✔ Task 2 Complete!${NC}\n"
 echo "\n${GREEN}- Executing Task 3${NC}\n"
 
-if [ ! -d $DOTFILE ];
+if [ ! -d $ROOTDOTFILE ];
   then
-    sudo mkdir $DOTFILE
-    sudo touch "${DOTFILE}/syncList.txt"
+    sudo mkdir $ROOTDOTFILE
+    sudo touch "${ROOTDOTFILE}/syncList"
 fi
 
-echo "'${DOTFILE}' created"
-echo "'${DOTFILE}/syncList.txt' created"
+if [ ! -d $USERDOTFILE ];
+  then
+    sudo makdir $USERDOTFILE
+fi
+
+echo "'${ROOTDOTFILE}' created"
+echo "'${ROOTDOTFILE}/syncList' created"
+echo "'${USERDOTFILE}' created"
 
 printf "\n${GREEN}✔ Task 3 Complete!${NC}\n"
