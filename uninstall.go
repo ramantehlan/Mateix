@@ -35,6 +35,7 @@ func uninstall() {
 		getHome() + "/.mateixConfig",
 	}
 
+  fmt.Println("Service stopped")
   execute(exec.Command("sudo", "mateixWatch", "stop"))
 
   for file , _ := range files {
@@ -46,6 +47,9 @@ func uninstall() {
         fmt.Println("Removed ", files[file])
 			case mode.IsRegular():
 				execute(exec.Command("sudo", "rm", files[file]))
+        fmt.Println("Removed ", files[file])
+      default:
+        execute(exec.Command("sudo", "rm", files[file]))
         fmt.Println("Removed ", files[file])
 			}
 		}
