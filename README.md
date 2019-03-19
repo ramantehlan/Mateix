@@ -158,7 +158,7 @@ A program no matter how well written, will always have that 0.1% chance that it 
 
 *Result*
 
-After considering, I have decided to use **`git`**. *I will make a automatic `git commit` either immediately, or by a cron job.* 
+After considering, I have decided to use **`git`**. *I will make a automatic `git commit` either immediately, or by a cron job.*
 
 ***
 
@@ -190,10 +190,14 @@ Once Mateix is installed, now you can use it to sync folders. Following are the 
 
 ##### Mateix
 
+`Mateix` is the main program which will get the job done, it will communicate with the other systems, and synchronize files.
+
 Command <br> (Prefix: `mateix`) | Working |
 --------|---------|
 init | To set up a folder for sync
+-w /path/to/watchFolder | To sync the changes in the folder
 --help | Print all the commands
+uninstall | To uninstall the mateix from the system
 
 > **Note:** In any case, you must not rename your mateix watched folder. Since, it's location is added to /etc/.mateix/syncList, on rename it will not watch that folder.
 
@@ -230,7 +234,13 @@ To set up the development environment in your system:
 
 ```
 .
+.
+├── install
 ├── LICENSE
+├── main.go
+├── mateix
+├── mateixWatch
+├── mateix-watch.service
 └── README.md
 ```
 
@@ -239,6 +249,10 @@ No | File/Folder Name | Purpose |
 1 | `README.md` | Current file you are reading
 2 | `LICENSE` | GNU GPL V3.0 License
 3 | `install` | Install script
+4 | `mateix` | Main binary to synchronize  
+5 | `mateixWatch` | To catch the changes in folders
+6 | `mateix-watch.service` | Service to call `mateixWatch` on boot
+7 | `main.go` | Main/initial file of the program
 
 ## Resources
 
