@@ -11,11 +11,12 @@ A simple file synchronisation tool.
 - [Usage](#usage)
   - [Installation](#installation)
   - [Commands](#commands)
+    - [Mateix](#mateix)
+    - [MateixWatch](#mateix-watch)
 - [Development](#development)
   - [Pre-Requisites](#pre-requisites)
   - [Setup](#setup)
   - [File Structure](#file-structure)
-  - [Working](#working)
 - [Resources](#resources)
 - [License](#license)
 - [Original Problem](#original-problem)
@@ -55,6 +56,8 @@ We have multiple methods to communicate securely over the internet, which will a
 2. Eternal Terminal
 3. Mosh
 
+*Result*
+
 After comparing all the methods, I have used **`Mosh`** since it fits the
 needs best. It is *highly efficient, works well on low bandwidth/connection
 is persist over different networks, works well on all the operating systems.*
@@ -65,45 +68,34 @@ is persist over different networks, works well on all the operating systems.*
 
 Following are the options on when files should be synchronized:
 
-- Immediately
+1. Immediately `inotify-tools`
+2. After a time gap `crontab`
 
-  To do this, we need a file watcher program, which will watch our files and will update us about any changes, this will not just take fewer resources, but is a better option as it will be real time. It will use more resources only when we are heavily using the system. This will also be better for the merge conflict as the files will be updated in real time.
+*Result*
 
-  However this might cause one problem, if we update the device 2, a call will be triggered as well, which might send the changes back to device 1. This will probably cause a butterfly effect.
+After comparing all the options, I have decided to synchronize **`immediately`** a change is detected. *It will make it real time, will prevent merge conflict.*
 
-  Also, the problem with inotify tool is that, Inotify does not support recursively watching directories, so if the main folder have sub-folder, it won't track them.
-
-  Rename events are not handled directly; i.e., inotify issues two separate events that must be examined and matched in a context of potential race conditions.
-
-  `inotify-tools`
-
-- After a time gap.
-
-  To do this, we need to set up a cron job, which will run after a particular period of time, and then it will sync everything. It will be using more resources as it will run even when there are no changes.
-
-  `crontab -e` -> this is for individual users.
-
-
-  Or, we can also run .service encodes information about a process controlled and supervised by `systemd`. -> this is for whole system
+> **Note:** if we update the device 1, updates will be sent to device 2, that will trigger the script, which will try to update the device 1, and this might go in a loop. We need to be handle the **butterfly effect**.
 
 ***
 
 **Challenge: How should we measure the difference?**
 
-
 To measure the difference, we can use any of method mentioned below.
 
-1. Time modification (Metadata)
+1. **Time modification (Metadata)**
 
 It is **less reliable** since software can and does manipulate the modification
 time. Also, the user might change system time and confuse the sync program. But,
 it is a **faster** way to check if the files have been updated.
 
-2. Checksum (Hash the files)
+2. **Checksum (Hash the files)**
 
 It's an (almost) certain way measure difference, hash collisions do happen,
 but It is rare and therefor **more reliable**. Though it is **slow**,
 as the file size will grow, it will get slower.
+
+*Result*
 
 After comparing all the methods, I have used **`Time modification`** as a measure to
 look for difference, since *the possibility of something going wrong is very less,
@@ -112,6 +104,8 @@ and it is the fastest way to do so.*
 ***
 
 **Challenge: How should we tackle the differences?**
+
+*Result*
 
 Following are the 3 cases that we need to handle:
 
@@ -129,7 +123,7 @@ No Change | No change | Nothing
 Modification | No change | Use A
 Modification | Modification | Merge
 
-> Also note, vice-versa is also true in this action table.
+> **Note:** vice-versa is also true in this action table.
 
 Following is the action table based on the time:
 
@@ -151,11 +145,20 @@ Another way to prevent merge conflicts is to lock a file on machine A if it’s 
 
 Provide only the read access to the other device, only the original owner will have the write access
 
+*Result*
+
 ***
 
 **Challenge: What if something still goes wrong with data?**
 
-A program no matter how well written, will always have that 0.1% that it will fail. In a case like that, the most important thing is the data. I have created a automatic git commits system, which will look for changes every 10 minutes, and will automaticlly trigger a commit. You can also switch it off if you want.
+A program no matter how well written, will always have that 0.1% chance that it will fail. In a case like that, the most important thing is the data. Following are the options we have to prevent that from happening.
+
+- Local Backup
+- Git
+
+*Result*
+
+After considering, I have decided to use **`git`**. *I will make a automatic `git commit` either immediately, or by a cron job.* 
 
 ***
 
@@ -175,7 +178,7 @@ To install Mateix, open your terminal, and type the commands given below.
 
 1. Download the [Install](https://raw.githubusercontent.com/ramantehlan/mateix/master/install) script. `$ wget https://raw.githubusercontent.com/ramantehlan/mateix/master/install`
 2. Make the script executables. `$ chmod +x ./install`
-3. Execute the `install` script. `$ ./install`
+3. Execute the `install` script as root. `$ sudo ./install`
 
 This will not just install Mateix in the bin file, but will also install all the dependencies like git, ssh, crontab etc. You can check out more details of it when the script is getting downloaded.
 
@@ -185,12 +188,24 @@ This will not just install Mateix in the bin file, but will also install all the
 
 Once Mateix is installed, now you can use it to sync folders. Following are the commands available right now to help you sync folders.
 
-> Also note, all commands have a fixed prefix `mateix`. Example: if a command is `init`, it must be executed as `mateix init`.
+##### Mateix
 
-Command | Working |
+Command <br> (Prefix: `mateix`) | Working |
 --------|---------|
 init | To set up a folder for sync
 --help | Print all the commands
+
+> **Note:** In any case, you must not rename your mateix watched folder. Since, it's location is added to /etc/.mateix/syncList, on rename it will not watch that folder.
+
+##### mateixWatch
+
+`mateixWatch` is the script which catch the changes in files, and call `mateix` command to take care of it. `mateixWatch` is automaticlly executed when the system starts by `mateix-watch.service`. It supports only following commands.
+
+Command <br> (Prefix: `mateixWatch`) | Working
+--------|---------|
+start | To start the watch program on the files listed in `/etc/.mateix/syncList`. It use `inotifywait` to catch changes. <br><br> **Note:** I do not suggest using this command to start the watch program. Instead, you should start the `mateix-watch.service` service. If you still wish to use it, make sure you are a root user.
+stop | To stop the watch program, by killing all the `inotifywait` processes.
+
 
 ## Development
 
@@ -224,10 +239,6 @@ No | File/Folder Name | Purpose |
 1 | `README.md` | Current file you are reading
 2 | `LICENSE` | GNU GPL V3.0 License
 3 | `install` | Install script
-
-#### Working
-
-After you install Mateix, an executable is created in bin file, whose Dotfiles are store in the home folder.
 
 ## Resources
 
