@@ -57,13 +57,13 @@ echo "\n${GREEN}- Executing Task 2${NC}\n"
 
   if [ ! -f "${BINFILE}/mateixWatch" ];
     then
-      sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateixWatch
+      sudo wget -O "${BINFILE}/mateixWatch" https://raw.githubusercontent.com/ramantehlan/mateix/master/service/mateixWatch
       sudo chmod +x "${BINFILE}/mateixWatch"
   fi
 
   if [ ! -f "${SERVICEFILE}/mateix-watch.service" ];
     then
-    sudo wget -O "${SERVICEFILE}/mateix-watch.service" https://raw.githubusercontent.com/ramantehlan/mateix/master/mateix-watch.service
+    sudo wget -O "${SERVICEFILE}/mateix-watch.service" https://raw.githubusercontent.com/ramantehlan/mateix/master/service/mateix-watch.service
     sudo chmod +rw "${SERVICEFILE}/mateix-watch.service"
     sudo systemctl daemon-reload
     sudo systemctl enable mateix-watch.service
