@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
+  "fmt"
 )
 
 func execute(cmd *exec.Cmd) {
@@ -34,14 +35,18 @@ func uninstall() {
 		getHome() + "/.mateixConfig",
 	}
 
-	for file , _ := range files {
+  execute(exec.Command("sudo", "mateixWatch", "stop"))
+
+  for file , _ := range files {
 		fi , err := os.Stat(files[file])
 		if err == nil {
 			switch mode := fi.Mode(); {
 			case mode.IsDir():
-				go execute(exec.Command("sudo", "rm", "-r", files[file]))
+				execute(exec.Command("sudo", "rm", "-r", files[file]))
+        fmt.Println("Removed ", files[file])
 			case mode.IsRegular():
-				go execute(exec.Command("sudo", "rm", files[file]))
+				execute(exec.Command("sudo", "rm", files[file]))
+        fmt.Println("Removed ", files[file])
 			}
 		}
 	}

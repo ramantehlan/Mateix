@@ -84,7 +84,7 @@ fi
 
 if [ ! -d $USERDOTFILE ];
   then
-    sudo makdir $USERDOTFILE
+    sudo mkdir $USERDOTFILE
 fi
 
 echo "'${ROOTDOTFILE}' created"
