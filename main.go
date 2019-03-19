@@ -18,27 +18,28 @@ func main() {
 		os.Exit(1)
 	}
 
+  // Choose which sub-command
 	switch os.Args[1] {
 	case "update":
 		updateCmd.Parse(os.Args[2:])
   case "init":
-    fmt.Println("init command to list it in mateixWatch")
+    initialize()
   case "uninstall":
-    fmt.Println("To uninstall the program")
+    uninstall()
 	default:
 		error.Error("Unknown sub command")
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
 
+  // Update sub-command
 	if updateCmd.Parsed() {
 		if *updateFilePtr == "" {
       fmt.Println("usage of update:")
 			updateCmd.PrintDefaults()
 			os.Exit(1)
 		}
-		// Print
-		fmt.Println("You are here")
+    update(*updateFilePtr)
 	}
 
 }
