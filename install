@@ -34,7 +34,6 @@ echo "
 This will install the Mateix tool in your system. This require
 the root acess. Following are the tasks preformed.
 
-
 ${GREEN}[Task 1]${NC} Install all the dependencies.
 ${GREEN}[Task 2]${NC} Install the Mateix executables and services.
 ${GREEN}[Task 3]${NC} Create the dotfiles and config files.
@@ -45,9 +44,7 @@ echo "${YELLOW}---------------------------------------------------------------${
 echo "\n${GREEN}- Executing Task 1${NC}\n"
 
 #sudo apt-get update
-#sudo apt-get install inotify-tools
-#sudo apt-get install git
-#sudo apt-get install mosh
+#sudo apt-get -y install inotify-tools git openssh-server ssh mosh
 
 echo "\n${GREEN}✔ Task 1 Complete!${NC}\n"
 echo "\n${GREEN}- Executing Task 2${NC}\n"
