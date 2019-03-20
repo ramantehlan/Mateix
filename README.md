@@ -234,14 +234,21 @@ To set up the development environment in your system:
 
 ```
 .
-.
+├── init.go
 ├── install
 ├── LICENSE
 ├── main.go
 ├── mateix
-├── mateixWatch
-├── mateix-watch.service
-└── README.md
+├── packages
+│   └── error
+│       └── error.go
+├── README.md
+├── service
+│   ├── mateixWatch
+│   └── mateix-watch.service
+├── uninstall.go
+└── update.go
+
 ```
 
 No | File/Folder Name | Purpose |
