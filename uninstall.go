@@ -29,8 +29,8 @@ func uninstall() {
 	var files = []string{
 		"/usr/bin/mateix",
 		"/usr/bin/mateixWatch",
-		"/etc/systemd/system/mateix-watch.service",
 		"/etc/systemd/system/multi-user.target.wants/mateix-watch.service",
+		"/etc/systemd/system/mateix-watch.service",
 		"/etc/.mateix",
 		getHome() + "/.mateixConfig",
 	}
@@ -47,9 +47,6 @@ func uninstall() {
         fmt.Println("Removed ", files[file])
 			case mode.IsRegular():
 				execute(exec.Command("sudo", "rm", files[file]))
-        fmt.Println("Removed ", files[file])
-      default:
-        execute(exec.Command("sudo", "rm", files[file]))
         fmt.Println("Removed ", files[file])
 			}
 		}
