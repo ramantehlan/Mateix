@@ -1,12 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"os/exec"
-  "fmt"
-  "github.com/ramantehlan/mateix/packages/command"
+
+	"github.com/ramantehlan/mateix/packages/command"
 )
 
-func uninstall() {
+// Uninstall is to delete the mateix tool from the system
+func Uninstall() {
 	var files = []string{
 		"/usr/bin/mateix",
 		"/usr/bin/mateixWatch",
@@ -16,19 +18,19 @@ func uninstall() {
 		command.GetHome() + "/.mateixConfig",
 	}
 
-  fmt.Println("Service stopped")
-  command.Execute(exec.Command("sudo", "mateixWatch", "stop"))
+	fmt.Println("Service stopped")
+	command.Execute(exec.Command("sudo", "mateixWatch", "stop"))
 
-  for file , _ := range files {
+	for file := range files {
 		if command.FileExist(files[file]) {
 			fi := command.GetStat(files[file])
 			switch mode := fi.Mode(); {
 			case mode.IsDir():
 				command.Execute(exec.Command("sudo", "rm", "-r", files[file]))
-        fmt.Println("Removed ", files[file])
+				fmt.Println("Removed ", files[file])
 			case mode.IsRegular():
 				command.Execute(exec.Command("sudo", "rm", files[file]))
-        fmt.Println("Removed ", files[file])
+				fmt.Println("Removed ", files[file])
 			}
 		}
 	}
