@@ -1,9 +1,10 @@
 package main
 
 import (
-  "fmt"
+	f "fmt"
 )
 
-func update(path string){
-  fmt.Println(path)
+// Update is to update the path with the sync system
+func Update(path string) {
+	f.Println(path)
 }
