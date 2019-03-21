@@ -9,13 +9,16 @@ while inotifywait -qqre modify $1 -e create -e moved_to -e moved_from; do
 done
 }
 
+i=0
 SyncList="${DOTFILE}/syncList"
 while IFS= read -r folderName
 do
   case $1 in
     start)
       mateixWatch "$folderName" &
-      mateix server -start
+      if [ $i -eq 0 ]; then
+        mateix server -start &
+      fi
     ;;
     stop)
       sudo killall -e inotifywait -qqre modify $1 -e create -e moved_to -e moved_from
@@ -24,4 +27,5 @@ do
       echo "Error: ${1} wrong command"
     ;;
   esac
+  i=$((i+1))
 done < "$SyncList"
