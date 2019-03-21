@@ -19,7 +19,7 @@ func Uninstall() {
 	}
 
 	fmt.Println("Service stopped")
-	command.Execute(exec.Command("sudo", "mateixWatch", "stop"))
+	//command.Execute(exec.Command("sudo", "mateixWatch", "stop"))
 
 	for file := range files {
 		if command.FileExist(files[file]) {
