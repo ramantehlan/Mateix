@@ -15,6 +15,7 @@ do
   case $1 in
     start)
       mateixWatch "$folderName" &
+      mateix server -start
     ;;
     stop)
       sudo killall -e inotifywait -qqre modify $1 -e create -e moved_to -e moved_from
