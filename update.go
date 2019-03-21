@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -10,6 +11,25 @@ import (
 
 	"github.com/ramantehlan/mateix/packages/e"
 )
+
+// ReadJSON a json file and return the byte data
+func ReadJSON(file string) Config {
+	fileData, err := os.Open(file)
+	e.Check(err)
+	defer fileData.Close()
+	byteData, err := ioutil.ReadAll(fileData)
+	e.Check(err)
+	jsonData := ByteToJSON(byteData)
+	return jsonData
+}
+
+// ByteToJSON Parse a json file
+func ByteToJSON(byteData []byte) Config {
+	var jsonData Config
+	err := json.Unmarshal(byteData, &jsonData)
+	e.Check(err)
+	return jsonData
+}
 
 func connectToServer(addr string, port int) net.Conn {
 	dest := addr + ":" + strconv.Itoa(port)
@@ -32,12 +52,10 @@ func connectToServer(addr string, port int) net.Conn {
 // Update is to update the path with the sync system
 func Update(path string) {
 	fmt.Println(path)
-	conn := connectToServer("0.0.0.0", 1248)
+	conf := ReadJSON(path + "/.mateix/config.json")
+	conn := connectToServer(conf.TargetIP, 1248)
 
-	// Package size can be 1 to 65495
-	const BUFFERSIZE = 1024
-
-	dat, err := ioutil.ReadFile("/home/atom/mateixTest/sample.txt")
+	dat, err := ioutil.ReadFile("/home/atom/mateixTest/data")
 	e.Check(err)
 	text := string(dat)
 
