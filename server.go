@@ -50,7 +50,7 @@ func handleConnection(conn net.Conn) {
 		file += scanner.Text() + "\n"
 	}
 	d1 := []byte(file)
-	err := ioutil.WriteFile(command.GetHome()+"/mateixTest/sample2.txt", d1, 0644)
+	err := ioutil.WriteFile(command.GetHome()+"/mateixTest/data", d1, 0644)
 	e.Check(err)
 	fmt.Println("Client at " + remoteAddr + " disconnected.")
 }
