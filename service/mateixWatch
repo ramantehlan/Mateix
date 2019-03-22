@@ -18,7 +18,7 @@ do
     start)
       mateixWatch "$folderName" &
       if [ $i -eq 0 ]; then
-        mateix server -start &
+        mateix server --start &
       fi
     ;;
     stop)
