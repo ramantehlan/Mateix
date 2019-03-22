@@ -130,7 +130,7 @@ For this solution, we are just tracking one file `data`, and we are doing synchr
 Following are the methods we have to prevent merge conflict:
 
 No | Method | Details | Merge Quality | Automatic
----|--------|--------
+---|--------|---------|---------------|-----------
 1 | Ask the user | Ask the user how to merge them or which one to pick. | Best| No
 2 | Lock other user files | Lock a file if it is owned by the other user. | No Merge | Yes
 3 | overwrite with latest changes | We can overwrite the file with latest changes. | Medium | Yes
