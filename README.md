@@ -51,9 +51,9 @@ For our solution, we will only cover the 1st case. The same solution can be appl
 
 No | Method | Secure | Reliable | Speed | Automatic |
 ---|--------|--------|----------|-------|-----------|
-1. | TCP (Transmission Control Protocol) | Medium | High | Fast | Yes
-2. | SSH (Secure Shell) | High | High | Medium | Not by default
-3. | UDP (User Datagram Protocol) | Less | Less | Fastest | Yes
+1 | TCP (Transmission Control Protocol) | Medium | High | Fast | Yes
+2 | SSH (Secure Shell) | High | High | Medium | Not by default
+3 | UDP (User Datagram Protocol) | Less | Less | Fastest | Yes
 
 *Result*
 
@@ -82,8 +82,8 @@ To measure the difference, we can use any of method mentioned below.
 
 No | Method | Reliable | Speed
 ---|--------|----------|------
-1. | Time Modification (Metadata) | `Less Reliable` <br>software can and does manipulate the modification time. Also, the user might change system time and confuse the sync program. | `Fast` <br> O(1)
-2. | Checksum (Hash the file) | `More Realible` <br> It's an (almost) certain way measure difference, hash collisions do happen, but It is rare. | `Slow` <br> O(n)
+1 | Time Modification (Metadata) | `Less Reliable` <br>software can and does manipulate the modification time. Also, the user might change system time and confuse the sync program. | `Fast` <br> O(1)
+2 | Checksum (Hash the file) | `More Realible` <br> It's an (almost) certain way measure difference, hash collisions do happen, but It is rare. | `Slow` <br> O(n)
 
 *Result*
 
@@ -131,9 +131,9 @@ Following are the methods we have to prevent merge conflict:
 
 No | Method | Details | Merge Quality | Automatic
 ---|--------|--------
-1. | Ask the user | Ask the user how to merge them or which one to pick. | Best| No
-2. | Lock other user files | Lock a file if it is owned by the other user. | No Merge | Yes
-3. | overwrite with latest changes | We can overwrite the file with latest changes. | Medium | Yes
+1 | Ask the user | Ask the user how to merge them or which one to pick. | Best| No
+2 | Lock other user files | Lock a file if it is owned by the other user. | No Merge | Yes
+3 | overwrite with latest changes | We can overwrite the file with latest changes. | Medium | Yes
 
 > **Note:** Resolving merge conflict is technically imposible without human intervene
 
