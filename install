@@ -42,7 +42,6 @@ echo "${YELLOW}---------------------------------------------------------------${
 
 echo "\n${GREEN}- Executing Task 1${NC}\n"
 
-sudo apt-get update
 sudo apt-get -y install inotify-tools
 
 echo "\n${GREEN}✔ Task 1 Complete!${NC}\n"
