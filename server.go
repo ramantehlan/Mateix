@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net"
+	"os/exec"
 	"strconv"
 
 	"github.com/ramantehlan/mateix/packages/command"
@@ -48,7 +49,7 @@ func server(action bool) {
 		}
 
 	} else {
-		// End the server
+		command.Execute(exec.Command("sudo", "pkill", "mateix"))
 	}
 }
 
