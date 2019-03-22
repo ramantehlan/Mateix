@@ -56,21 +56,23 @@ func Update(path string) {
 	conf := ReadJSON(path + "/.mateix/config.json")
 	conn := connectToServer(conf.TargetIP, 1248)
 	dataFile := path + "/data"
-	scanner := bufio.NewScanner(conn)
-	scanner.Scan()
-	incomingHash := scanner.Text()
-	outgoingHash := GetHash(dataFile)
-
-	if incomingHash != outgoingHash {
+	dataFileHash := GetHash(dataFile)
+	fmt.Println("LocalFile Hash: ", dataFileHash)
+	incomingHash, err := bufio.NewReader(conn).ReadString('\n')
+	fmt.Println("incoming Hash: ", incomingHash)
+	e.Check(err)
+	if incomingHash != dataFileHash+"\n" {
+		fmt.Println("Different Hash")
 		dat, err := ioutil.ReadFile(dataFile)
 		e.Check(err)
 		text := string(dat)
-
 		conn.SetWriteDeadline(time.Now().Add(1 * time.Second))
 		_, err = conn.Write([]byte(text))
 		if err != nil {
 			fmt.Println("Error writing to stream.")
 		}
+	} else {
+		fmt.Println("Same Hash")
 	}
 
 }
