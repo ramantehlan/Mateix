@@ -145,15 +145,10 @@ Again, in our case, this won't be a constant problem, we have just one file. So 
 
 ## Final Solution
 
-1. When you install the mateix tools in your system, following steps take place.
-
 ``` yml
 Step 1: Required tools are installed.
 - inotify-tools
 
-Details:
-`inotifywait` is a tool part of `inotify-tools`, which is used
-to catch changes in a folder or file.
 
 Step 2: Binary and service files are downloaded, and service is enabled.
 - /usr/bin/mateix
@@ -162,12 +157,36 @@ Step 2: Binary and service files are downloaded, and service is enabled.
 - daemon-reload
 - enable mateix-watch.service
 
+Step 3: Create the dotfiles and config files.
+- /etc/.mateix/
+- /etc/.mateix/syncList
+- /etc/.mateix/log  
+
+Step 4: Creating a mateix watched folder.
+-
+
 Details:
+`inotifywait` is a tool part of `inotify-tools`, which is used
+to catch changes in a folder or file.
+
 `mateix-watch.service` is started when the system boot, which
-calls `mateixWatch` program to catch any changes in the files
+activates the `mateixWatch` script.
+
+`mateixWatch` is the script to catch any changes in the files
 and folders which are listed in `/etc/.mateix/syncList`.
 
-Step 3:
+Once changes are detected, `mateixWatch` send the path to `mateix`
+to do the synchronisation amd log it to `/etc/.mateix/log`.
+
+`mateix` is the binary tool which reads the `PATH/.mateix/config.json`
+file to fetch `targetIP`, then it will connect to the server of the
+targetIP, and fetch the checksum fo the `targetDir`
+
+
+
+
+Details:
+
 ```
 
 ## Usage
