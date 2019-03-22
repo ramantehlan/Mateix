@@ -55,10 +55,10 @@ func server(action bool) {
 func handleConnection(conn net.Conn) {
 	remoteAddr := conn.RemoteAddr().String()
 	fmt.Println("Client connected from " + remoteAddr)
+	dataFile := command.GetHome() + "/mateixTest2/data"
+	conn.Write([]byte(GetHash(dataFile) + "\n"))
 	scanner := bufio.NewScanner(conn)
-	dataFile := command.GetHome() + "/mateixTest/data"
 	incomingData := ""
-	conn.Write([]byte(GetHash(dataFile)))
 	for {
 		ok := scanner.Scan()
 		if !ok {
@@ -66,8 +66,10 @@ func handleConnection(conn net.Conn) {
 		}
 		incomingData += scanner.Text() + "\n"
 	}
-	d1 := []byte(incomingData)
-	err := ioutil.WriteFile(dataFile, d1, 0644)
-	e.Check(err)
+	if incomingData != "" {
+		d1 := []byte(incomingData)
+		err := ioutil.WriteFile(dataFile, d1, 0644)
+		e.Check(err)
+	}
 	fmt.Println("Client at " + remoteAddr + " disconnected.")
 }
