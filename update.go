@@ -55,6 +55,7 @@ func Update(path string) {
 	fmt.Println(path)
 	conf := ReadJSON(path + "/.mateix/config.json")
 	conn := connectToServer(conf.TargetIP, 1248)
+	conn.Write([]byte(conf.TargetDir + "\n"))
 	dataFile := path + "/data"
 	dataFileHash := GetHash(dataFile)
 	fmt.Println("LocalFile Hash: ", dataFileHash)
