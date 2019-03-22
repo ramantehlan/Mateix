@@ -72,7 +72,7 @@ Following are the options on when files should be synchronized:
 
 After comparing all the options, I have decided to synchronize **`immediately`** a change is detected. *It will make it real time, will prevent merge conflict.*
 
-> **Note:** if we update the device 1, updates will be sent to device 2, that will trigger the script, which will try to update the device 1, and this might go in a loop. We need to be handle the **butterfly effect**.
+> **Note:** if we update the device 1, updates will be sent to device 2, that will trigger the script, which will try to update the device 1, and this might go in a loop. We need to handle the **butterfly effect**.
 
 ***
 
@@ -83,7 +83,7 @@ To measure the difference, we can use any of method mentioned below.
 No | Method | Reliable | Speed
 ---|--------|----------|------
 1 | Time Modification (Metadata) | `Less Reliable` <br>software can and does manipulate the modification time. Also, the user might change system time and confuse the sync program. | `Fast` <br> O(1)
-2 | Checksum (Hash the file) | `More Realible` <br> It's an (almost) certain way measure difference, hash collisions do happen, but It is rare. | `Slow` <br> O(n)
+2 | Checksum (Hash the file) | `More Reliable` <br> It's an (almost) certain way measure difference, hash collisions do happen, but It is rare. | `Slow` <br> O(n)
 
 *Result*
 
@@ -132,10 +132,10 @@ Following are the methods we have to prevent merge conflict:
 No | Method | Details | Merge Quality | Automatic
 ---|--------|---------|---------------|-----------
 1 | Ask the user | Ask the user how to merge them or which one to pick. | Best| No
-2 | Lock other user files | Lock a file if it is owned by the other user. | No Merge | Yes
-3 | overwrite with latest changes | We can overwrite the file with latest changes. | Medium | Yes
+2 | Lock other user files | Lock a file if it is owned by the other user. | No-Merge | Yes
+3 | overwrite with latest changes | We can overwrite the file with the latest changes. | Medium | Yes
 
-> **Note:** Resolving merge conflict is technically imposible without human intervene
+> **Note:** Resolving to merge conflict is technically impossible without a human to intervene
 
 *Result*
 
@@ -182,12 +182,12 @@ activates the `mateixWatch` script.
 and folders which are listed in `/etc/.mateix/syncList`.
 
 Once changes are detected, `mateixWatch` send the $PATH to `mateix`
-to do the synchronisation amd log it to `/etc/.mateix/log`.
+to do the synchronisation and log it to `/etc/.mateix/log`.
 
 `mateix` is the binary tool which reads the `$PATH/.mateix/config.json`
 file to fetch `targetIP`, then it will connect to the server using the
-`targetIP`, and fetch the checksum fo the `targetDir`, if the checksum
-doesn't match, it will send the changes to the server, and server will
+`targetIP`, and fetch the checksum for the `targetDir`, if the checksum
+doesn't match, it will send the changes to the server, and the server will
 update the local `data` file. Checksum also help in solving the butterfly
 effect.
 
@@ -224,15 +224,15 @@ update | To update a mateix watched folder. <br> `--file` to provide the path wh
 server | `--start` to start the server. <br> `--stop` to stop the server. <br> Server use port `1248`
 uninstall | To uninstall the mateix from the system
 
-> **Note:** In any case, you must not rename your mateix watched folder. Since, it's location is added to /etc/.mateix/syncList, on rename it will misbehave.
+> **Note:** In any case, you must not rename your mateix watched folder. Since it's location is added to /etc/.mateix/syncList, on rename, it will misbehave.
 
 ##### mateixWatch
 
-`mateixWatch` is the script which catch the changes in files, and call `mateix` command to take care of it. `mateixWatch` is automaticlly executed when the system starts by `mateix-watch.service`. It supports only following commands.
+`mateixWatch` is the script which catches the changes in files, and calls `mateix` command to take care of it. `mateixWatch` is automatically executed when the system starts with `mateix-watch.service`. It supports only the following commands.
 
 Command <br> (Prefix: `mateixWatch`) | Working
 --------|---------|
-start | To start the watch program on the files listed in `/etc/.mateix/syncList`. It use `inotifywait` to catch changes. <br><br> **Note:** I do not suggest using this command to start the watch program. Instead, you should start the `mateix-watch.service` service. If you still wish to use it, make sure you are a root user.
+start | To start the watch program on the files listed in `/etc/.mateix/syncList`. It uses `inotifywait` to catch changes. <br><br> **Note:** I do not suggest using this command to start the watch program. Instead, you should start the `mateix-watch.service` service. If you still wish to use it, make sure you are a root user.
 stop | To stop the watch program, by killing all the `inotifywait` processes.
 
 
@@ -290,8 +290,8 @@ No | File Name  | Purpose |
 8 | `init.go` | Initialize the mateixWatch in a repository
 9 | `update.go` | Sync a folder with targetIP
 10 | `uninstall.go` | Uninstall the mateix tool from system
-11 | `server.go` | Server to get changes from client
-12 | `command.go`| Package to help in execution of unix commands
+11 | `server.go` | Server to get changes from the client
+12 | `command.go`| Package to help in the execution of Unix commands
 13 | `e.go` | Package to handle errors
 
 ## Resources
