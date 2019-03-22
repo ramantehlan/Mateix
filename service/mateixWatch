@@ -3,10 +3,10 @@
 DOTFILE="/etc/.mateix"
 
 mateixWatch() {
-echo "Running inotifywait on ${1}/data"
-while inotifywait -qqre modify "${1}/data" -e create -e moved_to -e moved_from; do
-    echo "Change found in ${1}/data" >> "${DOTFILE}/log"
-    mateix update -file $1
+echo "Running inotifywait on ${1}"
+while inotifywait -qqre modify $1 -e create -e moved_to -e moved_from; do
+    echo "Change found in ${1}" >> "${DOTFILE}/log"
+    mateix update -file $1 &
 done
 }
 
