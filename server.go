@@ -2,14 +2,29 @@ package main
 
 import (
 	"bufio"
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net"
 	"strconv"
 
 	"github.com/ramantehlan/mateix/packages/command"
 	"github.com/ramantehlan/mateix/packages/e"
 )
+
+// GetHash is to get the hash of a file
+func GetHash(path string) string {
+	hasher := sha256.New()
+	s, err := ioutil.ReadFile(path)
+	hasher.Write(s)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return hex.EncodeToString(hasher.Sum(nil))
+}
 
 func listenToClinet(addr string, port int) net.Listener {
 	src := addr + ":" + strconv.Itoa(port)
@@ -41,16 +56,18 @@ func handleConnection(conn net.Conn) {
 	remoteAddr := conn.RemoteAddr().String()
 	fmt.Println("Client connected from " + remoteAddr)
 	scanner := bufio.NewScanner(conn)
-	file := ""
+	dataFile := command.GetHome() + "/mateixTest/data"
+	incomingData := ""
+	conn.Write([]byte(GetHash(dataFile)))
 	for {
 		ok := scanner.Scan()
 		if !ok {
 			break
 		}
-		file += scanner.Text() + "\n"
+		incomingData += scanner.Text() + "\n"
 	}
-	d1 := []byte(file)
-	err := ioutil.WriteFile(command.GetHome()+"/mateixTest/data", d1, 0644)
+	d1 := []byte(incomingData)
+	err := ioutil.WriteFile(dataFile, d1, 0644)
 	e.Check(err)
 	fmt.Println("Client at " + remoteAddr + " disconnected.")
 }

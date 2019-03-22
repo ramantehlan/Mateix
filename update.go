@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -54,14 +55,22 @@ func Update(path string) {
 	fmt.Println(path)
 	conf := ReadJSON(path + "/.mateix/config.json")
 	conn := connectToServer(conf.TargetIP, 1248)
+	dataFile := path + "/data"
+	scanner := bufio.NewScanner(conn)
+	scanner.Scan()
+	incomingHash := scanner.Text()
+	outgoingHash := GetHash(dataFile)
 
-	dat, err := ioutil.ReadFile("/home/atom/mateixTest/data")
-	e.Check(err)
-	text := string(dat)
+	if incomingHash != outgoingHash {
+		dat, err := ioutil.ReadFile(dataFile)
+		e.Check(err)
+		text := string(dat)
 
-	conn.SetWriteDeadline(time.Now().Add(1 * time.Second))
-	_, err = conn.Write([]byte(text))
-	if err != nil {
-		fmt.Println("Error writing to stream.")
+		conn.SetWriteDeadline(time.Now().Add(1 * time.Second))
+		_, err = conn.Write([]byte(text))
+		if err != nil {
+			fmt.Println("Error writing to stream.")
+		}
 	}
+
 }

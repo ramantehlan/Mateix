@@ -43,6 +43,8 @@ func Initialize() {
 	if u.Uid == "0" {
 
 		if !command.FileExist(".mateix") {
+			command.Execute(exec.Command("sudo", "mateixWatch", "stop"))
+			fmt.Println("MateixWatch Service Stopped")
 			conf := Config{}
 			fmt.Println("This will initialize mateix watch in this folder:")
 			fmt.Print("Target IP: ")
@@ -65,6 +67,10 @@ func Initialize() {
 			fmt.Printf("Added '%s' in '/etc/.mateix/syncList'\n", command.GetCurrentPath())
 			fmt.Println("Created ", dotFile)
 			fmt.Println("Created ", configFile)
+			fmt.Println("MateixWatch Service Started Again")
+
+			command.Execute(exec.Command("sudo", "mateixWatch", "start"))
+
 		} else {
 			fmt.Printf("%s is already a mateix watched file\n", command.GetCurrentPath())
 		}
