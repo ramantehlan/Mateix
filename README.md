@@ -308,6 +308,14 @@ No | File Name  | Purpose |
 
 GNU GPL V3.0
 
+## Examples
+
+<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif" width="50%">
+
+<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif" width="50%">
+![System 1](https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal.gif)
+![System 2](https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal2.gif)
+
 ## Original Problem
 
 ```
