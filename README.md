@@ -345,12 +345,19 @@ GNU GPL V3.0
 ## Examples
 
 #### Install mateix
+
 <img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif">
+
 #### Create a mateix watched file
+
 <img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/mateix_init.gif">
+
 #### System 1
+
 <img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal.gif">
+
 #### System 2
+
 <img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal2.gif">
 
 
