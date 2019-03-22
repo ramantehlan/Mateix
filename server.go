@@ -10,6 +10,7 @@ import (
 	"net"
 	"os/exec"
 	"strconv"
+	"strings"
 
 	"github.com/ramantehlan/mateix/packages/command"
 	"github.com/ramantehlan/mateix/packages/e"
@@ -56,7 +57,10 @@ func server(action bool) {
 func handleConnection(conn net.Conn) {
 	remoteAddr := conn.RemoteAddr().String()
 	fmt.Println("Client connected from " + remoteAddr)
-	dataFile := command.GetHome() + "/mateixTest/data"
+	fileLoc, err := bufio.NewReader(conn).ReadString('\n')
+	fileLoc = strings.ReplaceAll(fileLoc, "\n", "")
+	e.Check(err)
+	dataFile := fileLoc + "/data"
 	conn.Write([]byte(GetHash(dataFile) + "\n"))
 	scanner := bufio.NewScanner(conn)
 	incomingData := ""
