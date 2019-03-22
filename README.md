@@ -145,7 +145,30 @@ Again, in our case, this won't be a constant problem, we have just one file. So 
 
 ## Final Solution
 
-``
+1. When you install the mateix tools in your system, following steps take place.
+
+``` yml
+Step 1: Required tools are installed.
+- inotify-tools
+
+Details:
+`inotifywait` is a tool part of `inotify-tools`, which is used
+to catch changes in a folder or file.
+
+Step 2: Binary and service files are downloaded, and service is enabled.
+- /usr/bin/mateix
+- /usr/bin/mateixWatch
+- /etc/systemd/system/mateix-watch.service
+- daemon-reload
+- enable mateix-watch.service
+
+Details:
+`mateix-watch.service` is started when the system boot, which
+calls `mateixWatch` program to catch any changes in the files
+and folders which are listed in `/etc/.mateix/syncList`.
+
+Step 3:
+```
 
 ## Usage
 
@@ -234,15 +257,21 @@ To set up the development environment in your system:
 └── update.go
 ```
 
-No | File/Folder Name | Purpose |
+No | File Name  | Purpose |
 ---|------------------|---------|
 1 | `README.md` | Current file you are reading
 2 | `LICENSE` | GNU GPL V3.0 License
 3 | `install` | Install script
-4 | `mateix` | Main binary to synchronize  
-5 | `mateixWatch` | To catch the changes in folders
+4 | `mateix` | Complied binary to run the tool
+5 | `mateixWatch`  | Script to catch changes in folders
 6 | `mateix-watch.service` | Service to call `mateixWatch` on boot
 7 | `main.go` | Main/initial file of the program
+8 | `init.go` | Initialize the mateixWatch in a repository
+9 | `update.go` | Sync a folder with targetIP
+10 | `uninstall.go` | Uninstall the mateix tool from system
+11 | `server.go` | Server to get changes from client
+12 | `command.go`| Package to help in execution of unix commands
+13 | `e.go` | Package to handle errors
 
 ## Resources
 

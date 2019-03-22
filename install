@@ -5,7 +5,6 @@
 ##
 
 ROOTDOTFILE="/etc/.mateix"
-USERDOTFILE="${HOME}/.mateixConfig"
 BINFILE="/usr/bin"
 SERVICEFILE="/etc/systemd/system"
 
@@ -82,13 +81,7 @@ if [ ! -d $ROOTDOTFILE ];
     sudo touch "${ROOTDOTFILE}/syncList"
 fi
 
-if [ ! -d $USERDOTFILE ];
-  then
-    sudo mkdir $USERDOTFILE
-fi
-
 echo "'${ROOTDOTFILE}' created"
 echo "'${ROOTDOTFILE}/syncList' created"
-echo "'${USERDOTFILE}' created"
 
 printf "\n${GREEN}✔ Task 3 Complete!${NC}\n"
