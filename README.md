@@ -23,11 +23,9 @@ A simple file synchronisation tool.
 
 ## Problem Statement
 
-**We need to create a solution to synchronize two folders in two different devices**. To finally decide upon our solution, we need to make sure the following characteristics are met.
+**We need to create a solution to synchronize two folders in two different devices, each folder have a file called `data`, which needs to be synchronized and it should be bi-directional**. To finally decide upon our solution, we need to make sure the following characteristics are met.
 
 - **Reliability:** Solution should be reliable, and should take care of all the possible cases it can go wrong.
-
-- **Secure:** The whole process should be secure.
 
 - **Automatic:** Everything should happen in the background with minimum human intervene.
 
@@ -41,26 +39,25 @@ Following are the challenges we need to tackle, mentioned with their possible so
 
 **Challenge: How should we communicate between two computers?**
 
+When communicating over the internet, following possible scenarios:
 
-Any selected solution should work effectively in the following possible scenarios:
+No |IP-1 | IP-2 |  Details |
+---|-----|------|----------|
+ 1 | Static | Static |`Server to Server` <br> Example: Backup servers connected to production servers.
+ 2 | Dynamic | Static | `Server to remote devices` <br> Example: Dropbox, Google drive connected to remote devices.
+ 3 | Dynamic | Dynamic | `Two remote devices` <br> Example: Two remote devices connected.
 
-IP-1 | IP-2 |  Details |
------|------|----------|
-Static | Static |`Server to Server` <br> Example: Backup servers connected to production servers.
-Dynamic | Static | `Server to remote devices` <br> Example: Dropbox, Google drive connected to remote devices.
-Dynamic | Dynamic | `Two remote devices` <br> Example: Two remote devices connected.
+For our solution, we will only cover the 1st case. The same solution can be applied for other cases, which little changes. We have multiple methods to communicate over the internet, some are mentioned below.
 
-We have multiple methods to communicate securely over the internet, which will also work for the above scenarios. Following are the top 3 of selected methods:
-
-1. SSH
-2. Eternal Terminal
-3. Mosh
+No | Method | Secure | Reliable | Speed | Automatic |
+---|--------|--------|----------|-------|-----------|
+1. | TCP (Transmission Control Protocol) | Medium | High | Fast | Yes
+2. | SSH (Secure Shell) | High | High | Medium | Not by default
+3. | UDP (User Datagram Protocol) | Less | Less | Fastest | Yes
 
 *Result*
 
-After comparing all the methods, I have used **`Mosh`** since it fits the
-needs best. It is *highly efficient, works well on low bandwidth/connection
-is persist over different networks, works well on all the operating systems.*
+After comparing all the methods, I have decided to use **`TCP`**.
 
 ***
 
@@ -83,29 +80,18 @@ After comparing all the options, I have decided to synchronize **`immediately`**
 
 To measure the difference, we can use any of method mentioned below.
 
-1. **Time modification (Metadata)**
-
-It is **less reliable** since software can and does manipulate the modification
-time. Also, the user might change system time and confuse the sync program. But,
-it is a **faster** way to check if the files have been updated.
-
-2. **Checksum (Hash the files)**
-
-It's an (almost) certain way measure difference, hash collisions do happen,
-but It is rare and therefor **more reliable**. Though it is **slow**,
-as the file size will grow, it will get slower.
+No | Method | Reliable | Speed
+---|--------|----------|------
+1. | Time Modification (Metadata) | `Less Reliable` <br>software can and does manipulate the modification time. Also, the user might change system time and confuse the sync program. | `Fast` <br> O(1)
+2. | Checksum (Hash the file) | `More Realible` <br> It's an (almost) certain way measure difference, hash collisions do happen, but It is rare. | `Slow` <br> O(n)
 
 *Result*
 
-After comparing all the methods, I have used **`Time modification`** as a measure to
-look for difference, since *the possibility of something going wrong is very less,
-and it is the fastest way to do so.*
+After comparing all the methods, I have decided to use **`Checksum`**.
 
 ***
 
 **Challenge: How should we tackle the differences?**
-
-*Result*
 
 Following are the 3 cases that we need to handle:
 
@@ -133,38 +119,33 @@ Does not exist | Exist | Created
 Existed | Does not exist |  Deleted
 Exist | Modification | Modification
 
+*Result*
+
+For this solution, we are just tracking one file `data`, and we are doing synchronization immediately, so most of the cases won't apply to us.
+
 ***
 
 **Challenge: How will you handle a merge conflict?**
 
-If the file exists and is different, you have to ask the user how to merge them or which one to pick. Asking regular users how to merge files is a bad idea. (Asking developers how to merge files is usually a bad idea.)
+Following are the methods we have to prevent merge conflict:
 
-Another way to prevent merge conflicts is to lock a file on machine A if it’s being written to on machine B. This prevents an application on machine A from modifying it at the same time.
+No | Method | Details | Merge Quality | Automatic
+---|--------|--------
+1. | Ask the user | Ask the user how to merge them or which one to pick. | Best| No
+2. | Lock other user files | Lock a file if it is owned by the other user. | No Merge | Yes
+3. | overwrite with latest changes | We can overwrite the file with latest changes. | Medium | Yes
 
- Merges almost always require manual intervention and will often be unresolvable (either the user won’t know what to do and will just overwrite one side, or the file format won’t support lines-of-text style merging).
-
-Provide only the read access to the other device, only the original owner will have the write access
-
-*Result*
-
-***
-
-**Challenge: What if something still goes wrong with data?**
-
-A program no matter how well written, will always have that 0.1% chance that it will fail. In a case like that, the most important thing is the data. Following are the options we have to prevent that from happening.
-
-- Local Backup
-- Git
+> **Note:** Resolving merge conflict is technically imposible without human intervene
 
 *Result*
 
-After considering, I have decided to use **`git`**. *I will make a automatic `git commit` either immediately, or by a cron job.*
+Again, in our case, this won't be a constant problem, we have just one file. So I have decided to use `overwrite with latest changes` method.
 
 ***
 
 ## Final Solution
 
-Here will go the details of the final solution
+``
 
 ## Usage
 
@@ -240,15 +221,17 @@ To set up the development environment in your system:
 ├── main.go
 ├── mateix
 ├── packages
-│   └── error
-│       └── error.go
+│   ├── command
+│   │   └── command.go
+│   └── e
+│       └── e.go
 ├── README.md
+├── server.go
 ├── service
 │   ├── mateixWatch
 │   └── mateix-watch.service
 ├── uninstall.go
 └── update.go
-
 ```
 
 No | File/Folder Name | Purpose |
@@ -265,12 +248,10 @@ No | File/Folder Name | Purpose |
 
 - [Wiki File Synchronization](https://en.wikipedia.org/wiki/File_synchronization)
 - [Go Lang Org](https://golang.org/)
-- [SSH - Secure Shell](https://en.wikipedia.org/wiki/Secure_Shell)
-- [Eternal Terminal](https://mistertea.github.io/EternalTerminal/)
-- [Mosh](https://mosh.org/)
-- [Most Research Paper](https://mosh.org/mosh-paper.pdf)
-- [Git - Version Control System](https://en.wikipedia.org/wiki/Git)
-- [what could be better than ssh](https://medium.com/@grassfedcode/what-could-be-better-than-ssh-e69561ec1b83)
+- [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)
+- [SSH](https://en.wikipedia.org/wiki/Secure_Shell)
+- [UDP](https://en.wikipedia.org/wiki/User_Datagram_Protocol)
+- [pkg/net](https://golang.org/pkg/net/)
 - [File Synchronization Algorithms](https://ianhowson.com/blog/file-synchronisation-algorithms/)
 
 ## License
