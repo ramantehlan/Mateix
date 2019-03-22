@@ -196,7 +196,7 @@ effect.
 
 ## Usage
 
-Using Mateix is very simple. All you have to do is install this tool,
+Using Mateix is very simple. All you have to do is install this CLI tool.
 
 > Right now, the install script is tested only on a Debian-Based Distribution, but it can be easily configured for the other distros aswell.
 
@@ -211,7 +211,7 @@ To install Mateix, open your terminal, and type the commands given below.
 
 #### Commands  
 
-Once Mateix is installed, now you can use it to sync folders. Following are the commands available right now to help you sync folders.
+Once Mateix is installed, now you can use it to sync folders. Following are the commands available to help you sync folders.
 
 ##### Mateix
 
@@ -219,12 +219,12 @@ Once Mateix is installed, now you can use it to sync folders. Following are the 
 
 Command <br> (Prefix: `mateix`) | Working |
 --------|---------|
-init | To set up a folder for sync
--w /path/to/watchFolder | To sync the changes in the folder
---help | Print all the commands
+init | To initialize a mateix watched folder.
+update | To update a mateix watched folder. <br> `--file` to provide the path which needs to be updated.
+server | `--start` to start the server. <br> `--stop` to stop the server. <br> Server use port `1248`
 uninstall | To uninstall the mateix from the system
 
-> **Note:** In any case, you must not rename your mateix watched folder. Since, it's location is added to /etc/.mateix/syncList, on rename it will not watch that folder.
+> **Note:** In any case, you must not rename your mateix watched folder. Since, it's location is added to /etc/.mateix/syncList, on rename it will misbehave.
 
 ##### mateixWatch
 
