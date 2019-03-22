@@ -15,11 +15,10 @@ func Uninstall() {
 		"/etc/systemd/system/multi-user.target.wants/mateix-watch.service",
 		"/etc/systemd/system/mateix-watch.service",
 		"/etc/.mateix",
-		command.GetHome() + "/.mateixConfig",
 	}
 
 	fmt.Println("Service stopped")
-	//command.Execute(exec.Command("sudo", "mateixWatch", "stop"))
+	command.Execute(exec.Command("sudo", "mateixWatch", "stop"))
 
 	for file := range files {
 		if command.FileExist(files[file]) {
