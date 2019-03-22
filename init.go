@@ -60,13 +60,11 @@ func Initialize() {
 			ioutil.WriteFile("/etc/.mateix/syncList", syncList, 0644)
 			command.Execute(exec.Command("mkdir", command.GetCurrentPath()+"/.mateix"))
 			command.Execute(exec.Command("touch", command.GetCurrentPath()+"/.mateix/config.json"))
-			command.Execute(exec.Command("touch", command.GetCurrentPath()+"/data"))
 			CreateJSON(conf, command.GetCurrentPath()+"/.mateix/config.json")
 
 			fmt.Printf("Added '%s' in '/etc/.mateix/syncList'\n", command.GetCurrentPath())
 			fmt.Println("Created ", command.GetCurrentPath()+"/.mateix")
 			fmt.Println("Created ", command.GetCurrentPath()+"/.mateix/config.json")
-			fmt.Println("Created ", command.GetCurrentPath()+"/data")
 			fmt.Println("MateixWatch Service Started Again")
 
 			command.Execute(exec.Command("sudo", "mateixWatch", "start"))
