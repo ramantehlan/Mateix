@@ -61,7 +61,7 @@ func Initialize() {
 			command.Execute(exec.Command("mkdir", command.GetCurrentPath()+"/.mateix"))
 			command.Execute(exec.Command("touch", command.GetCurrentPath()+"/.mateix/config.json"))
 			command.Execute(exec.Command("touch", command.GetCurrentPath()+"/data"))
-			CreateJSON(conf, command.GetCurrentPath()+"/config.json")
+			CreateJSON(conf, command.GetCurrentPath()+"/.mateix/config.json")
 
 			fmt.Printf("Added '%s' in '/etc/.mateix/syncList'\n", command.GetCurrentPath())
 			fmt.Println("Created ", command.GetCurrentPath()+"/.mateix")
