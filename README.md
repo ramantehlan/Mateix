@@ -146,54 +146,59 @@ Again, in our case, this won't be a constant problem, we have just one file. So 
 ## Final Solution
 
 ``` yml
-Step 1: Required tools are installed.
+STEP 1: Required tools are installed.
 - inotify-tools
 
-
-Step 2: Binary and service files are downloaded, and service is enabled.
+STEP 2: Binary and service files are downloaded, and service is enabled.
 - /usr/bin/mateix
 - /usr/bin/mateixWatch
 - /etc/systemd/system/mateix-watch.service
 - daemon-reload
 - enable mateix-watch.service
 
-Step 3: Create the dotfiles and config files.
+STEP 3: Create the dotfiles and config files.
 - /etc/.mateix/
 - /etc/.mateix/syncList
 - /etc/.mateix/log  
 
-Step 4: Creating a mateix watched folder.
--
+STEP 4: Creating a mateix watched folder.
+- Add the path to /etc/.mateix/syncList
+- Create PATH/.mateix/config.json
 
-Details:
+STRUCTURE OF `config.json`:
+{
+  targetIP: // Ip of other device
+  targetDir: // Path of sync folder in other device
+}
+
+WORKING:
 `inotifywait` is a tool part of `inotify-tools`, which is used
 to catch changes in a folder or file.
 
 `mateix-watch.service` is started when the system boot, which
 activates the `mateixWatch` script.
 
-`mateixWatch` is the script to catch any changes in the files
+`mateixWatch` to catch any changes using `inotifywait` in the files
 and folders which are listed in `/etc/.mateix/syncList`.
 
-Once changes are detected, `mateixWatch` send the path to `mateix`
+Once changes are detected, `mateixWatch` send the $PATH to `mateix`
 to do the synchronisation amd log it to `/etc/.mateix/log`.
 
-`mateix` is the binary tool which reads the `PATH/.mateix/config.json`
-file to fetch `targetIP`, then it will connect to the server of the
-targetIP, and fetch the checksum fo the `targetDir`
+`mateix` is the binary tool which reads the `$PATH/.mateix/config.json`
+file to fetch `targetIP`, then it will connect to the server using the
+`targetIP`, and fetch the checksum fo the `targetDir`, if the checksum
+doesn't match, it will send the changes to the server, and server will
+update the local `data` file. Checksum also help in solving the butterfly
+effect.
 
-
-
-
-Details:
 
 ```
 
 ## Usage
 
-Using Mateix is very simple. First, you need to install this tool, and then use it as a shell command.
+Using Mateix is very simple. All you have to do is install this tool,
 
-> Right now, the install script will work only on a Debian-Based Distribution, but it can be easily configured for the other distros aswell.
+> Right now, the install script is tested only on a Debian-Based Distribution, but it can be easily configured for the other distros aswell.
 
 #### Installation
 
@@ -201,11 +206,8 @@ To install Mateix, open your terminal, and type the commands given below.
 
 1. Download the [Install](https://raw.githubusercontent.com/ramantehlan/mateix/master/install) script. `$ wget https://raw.githubusercontent.com/ramantehlan/mateix/master/install`
 2. Make the script executables. `$ chmod +x ./install`
-3. Execute the `install` script as root. `$ sudo ./install`
+3. Execute the `install` script. `$ ./install`
 
-This will not just install Mateix in the bin file, but will also install all the dependencies like git, ssh, crontab etc. You can check out more details of it when the script is getting downloaded.
-
-> In order to sync with the other system, you will need to install Mateix in it too.
 
 #### Commands  
 
