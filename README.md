@@ -19,6 +19,7 @@ A simple file synchronisation tool.
   - [File Structure](#file-structure)
 - [Resources](#resources)
 - [License](#license)
+- [Example](#example)
 - [Original Problem](#original-problem)
 
 ## Problem Statement
@@ -311,8 +312,8 @@ GNU GPL V3.0
 ## Examples
 
 <img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif" width="50%">
-
 <img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif" width="50%">
+
 ![System 1](https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal.gif)
 ![System 2](https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal2.gif)
 
