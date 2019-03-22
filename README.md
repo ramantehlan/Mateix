@@ -148,29 +148,31 @@ Again, in our case, this won't be a constant problem, we have just one file. So 
 
 ``` yml
 STEP 1: Required tools are installed.
-- inotify-tools
+        - inotify-tools
 
 STEP 2: Binary and service files are downloaded, and service is enabled.
-- /usr/bin/mateix
-- /usr/bin/mateixWatch
-- /etc/systemd/system/mateix-watch.service
-- daemon-reload
-- enable mateix-watch.service
+        - /usr/bin/mateix
+        - /usr/bin/mateixWatch
+        - /etc/systemd/system/mateix-watch.service
+        - daemon-reload
+        - enable mateix-watch.service
 
 STEP 3: Create the dotfiles and config files.
-- /etc/.mateix/
-- /etc/.mateix/syncList
-- /etc/.mateix/log  
+        - /etc/.mateix/
+        - /etc/.mateix/syncList
+        - /etc/.mateix/log  
 
 STEP 4: Creating a mateix watched folder.
-- Add the path to /etc/.mateix/syncList
-- Create PATH/.mateix/config.json
+        - Add the path to /etc/.mateix/syncList
+        - Create PATH/.mateix/config.json
 
 STRUCTURE OF `config.json`:
+
 {
   targetIP: // Ip of other device
   targetDir: // Path of sync folder in other device
 }
+
 
 WORKING:
 `inotifywait` is a tool part of `inotify-tools`, which is used
@@ -236,6 +238,37 @@ Command <br> (Prefix: `mateixWatch`) | Working
 start | To start the watch program on the files listed in `/etc/.mateix/syncList`. It uses `inotifywait` to catch changes. <br><br> **Note:** I do not suggest using this command to start the watch program. Instead, you should start the `mateix-watch.service` service. If you still wish to use it, make sure you are a root user.
 stop | To stop the watch program, by killing all the `inotifywait` processes.
 
+#### Sample
+
+``` yml
+Let's say you wish to synchronize `data` file present in `SYSTEM-1` and
+`SYSTEM-2`, at `192.168.43.99:/home/atom/mateixWatch` and
+`192.168.43.189/home/mspp/mateixWatch`.
+
+[SYSTEM 1]:
+  IP: 192.168.43.99
+  DIR: /home/atom/mateixWatch
+
+[SYSTEM 2]:
+  IP: 192.168.43.189
+  DIR: /home/mspp/mateixWatch
+
+Step 1: Create the desired folders in both the system, and add a `data` file
+        in both of them.
+
+Step 2: Install the mateix tool in both the system, with instructions given
+        above.
+
+Step 3: Go to folder, run `$ sudo mateix init` command, and follow the
+        instructions.
+
+Once all the above steps will be complete, you will see that all your changes
+are reflected in both the files, in both directions.
+
+So, changes made in `data` file of System 1, will be reflected in `data` file
+of System 2, and vice-versa
+
+```
 
 ## Development
 
@@ -311,11 +344,15 @@ GNU GPL V3.0
 
 ## Examples
 
-<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif" width="50%">
-<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif" width="50%">
+#### Install mateix
+<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/install_new.gif">
+#### Create a mateix watched file
+<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/mateix_init.gif">
+#### System 1
+<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal.gif">
+#### System 2
+<img src="https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal2.gif">
 
-![System 1](https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal.gif)
-![System 2](https://raw.githubusercontent.com/ramantehlan/mateix/master/gifs/TestFinal2.gif)
 
 ## Original Problem
 
